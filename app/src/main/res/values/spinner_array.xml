@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!-- TODO: Spinner Array -->
+  <string-array name="section_array">
+    <item>@string/default_spinner_text</item>
+  </string-array>
+</resources>
