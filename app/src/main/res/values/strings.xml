@@ -1,0 +1,16 @@
+<resources>
+  <!-- Application Name -->
+  <string name="app_name">News Q</string>
+  <!-- Navigation Items -->
+  <string name="title_world">World</string>
+  <string name="title_browse">Browse</string>
+  <string name="title_search">Search</string>
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
+
+  <!-- TODO: Spinner Text -->
+  <string name="default_spinner_text">Select a category</string>
+
+  <!-- Search EditText Hint -->
+  <string name="search_for_news">Search for News</string>
+</resources>
