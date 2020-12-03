@@ -9,6 +9,7 @@
 /build
 /captures
 .cxx
+/gradle.properties
 
 # Created by https://www.toptal.com/developers/gitignore/api/android,androidstudio,java,gradle,git
 
