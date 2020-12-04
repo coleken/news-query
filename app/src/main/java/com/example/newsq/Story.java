@@ -6,6 +6,7 @@ package com.example.newsq;
 public class Story {
 
   private String id;
+  private String type;
   private String sectionId;
   private String sectionName;
   private String webPublicationDate;
@@ -24,6 +25,7 @@ public class Story {
    * ArrayList constructor
    *
    * @param id                 A string that contains the id.
+   * @param type               A string that contains the type.
    * @param sectionId          A string that contains the section id.
    * @param sectionName        A string that contains the section name.
    * @param webPublicationDate A string that contains the web publication date.
@@ -31,9 +33,10 @@ public class Story {
    * @param webUrl             A string that contains the web url.
    * @param apiUrl             A string that contains the api url.
    */
-  public Story(String id, String sectionId, String sectionName, String webPublicationDate,
-      String webTitle, String webUrl, String apiUrl) {
+  public Story(String id, String type, String sectionId, String sectionName,
+      String webPublicationDate, String webTitle, String webUrl, String apiUrl) {
     this.id = id;
+    this.type = type;
     this.sectionId = sectionId;
     this.sectionName = sectionName;
     this.webPublicationDate = webPublicationDate;
@@ -166,6 +169,24 @@ public class Story {
    */
   public void setApiUrl(String apiUrl) {
     this.apiUrl = apiUrl;
+  }
+
+  /**
+   * Assigns the story's type (e.g. an article)
+   *
+   * @return A string that contains the story's type.
+   */
+  public String getType() {
+    return type;
+  }
+
+  /**
+   * Returns a the story's type (e.g. an article).
+   *
+   * @param type A string that contains the story's type.
+   */
+  public void setType(String type) {
+    this.type = type;
   }
 }
 
