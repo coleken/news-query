@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!-- TODO: Spinner Array -->
+  <!-- Spinner Array -->
   <string-array name="section_array">
     <item>@string/default_spinner_text</item>
+    <item>@string/section_art_and_design</item>
+    <item>@string/section_business</item>
+    <item>@string/section_cities</item>
+    <item>@string/section_culture</item>
+    <item>@string/section_education</item>
+    <item>@string/section_environment</item>
+    <item>@string/section_fashion</item>
+    <item>@string/section_film</item>
+    <item>@string/section_food</item>
+    <item>@string/section_inequality</item>
+    <item>@string/section_law</item>
+    <item>@string/section_life_and_style</item>
+    <item>@string/section_money</item>
+    <item>@string/section_music</item>
+    <item>@string/section_news</item>
+    <item>@string/section_politics</item>
+    <item>@string/section_science</item>
+    <item>@string/section_society</item>
+    <item>@string/section_sport</item>
+    <item>@string/section_tech</item>
+    <item>@string/section_travel</item>
+    <item>@string/section_weather</item>
+    <item>@string/section_world</item>
   </string-array>
 </resources>

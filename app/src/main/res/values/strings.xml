@@ -1,16 +1,98 @@
 <resources>
   <!-- Application Name -->
   <string name="app_name">News Q</string>
-  <!-- Navigation Items -->
+  <!-- = = = = = = = = = = Navigation Items = = = = = = = = = = -->
+  <!-- World Menu Title -->
   <string name="title_world">World</string>
+  <!-- Browse Menu Title -->
   <string name="title_browse">Browse</string>
+  <!-- Search Menu Title -->
   <string name="title_search">Search</string>
-  <!-- TODO: Remove or change this placeholder text -->
-  <string name="hello_blank_fragment">Hello blank fragment</string>
 
-  <!-- TODO: Spinner Text -->
+  <!-- = = = = = = = = = = Browse Fragment Text = = = = = = = = = = -->
+  <!-- Browse Sections Spinner Text -->
   <string name="default_spinner_text">Select a category</string>
 
-  <!-- Search EditText Hint -->
+  <!-- = = = = = = = = = = Search Fragment Text = = = = = = = = = = -->
+  <!-- Search EditText Field Hint -->
   <string name="search_for_news">Search for News</string>
+
+  <!-- = = = = = = = = = = API Query Text = = = = = = = = = = -->
+  <!-- = = = = = Base URL = = = = = -->
+  <!-- Scheme -->
+  <string name="uri_scheme">https</string>
+  <!-- Authority -->
+  <string name="uri_authority">content.guardianapis.com</string>
+  <!-- = = = = = Endpoints = = = = = -->
+  <!-- Endpoint Editions -->
+  <string name="endpoint_editions">editions</string>
+  <!-- Endpoint Content -->
+  <string name="endpoint_content">search</string>
+  <!-- Endpoint Sections -->
+  <string name="endpoint_sections">sections</string>
+  <!-- Endpoint Tags -->
+  <string name="endpoint_tags">tags</string>
+  <!-- = = = = = Sections = = = = = -->
+  <!-- Section Art & Design -->
+  <string name="section_art_and_design">artanddesign</string>
+  <!-- Section Business -->
+  <string name="section_business">business</string>
+  <!-- Section Cities -->
+  <string name="section_cities">cities</string>
+  <!-- Section Culture -->
+  <string name="section_culture">culture</string>
+  <!-- Section Education -->
+  <string name="section_education">education</string>
+  <!-- Section Environment -->
+  <string name="section_environment">environment</string>
+  <!-- Section Fashion -->
+  <string name="section_fashion">fashion</string>
+  <!-- Section Film -->
+  <string name="section_film">film</string>
+  <!-- Section Food -->
+  <string name="section_food">food</string>
+  <!-- Section Inequality -->
+  <string name="section_inequality">inequality</string>
+  <!-- Section Law -->
+  <string name="section_law">law</string>
+  <!-- Section Life & Style -->
+  <string name="section_life_and_style">lifeandstyle</string>
+  <!-- Section Money -->
+  <string name="section_money">money</string>
+  <!-- Section Music -->
+  <string name="section_music">music</string>
+  <!-- Section News -->
+  <string name="section_news">news</string>
+  <!-- Section Politics -->
+  <string name="section_politics">politics</string>
+  <!-- Section Science -->
+  <string name="section_science">science</string>
+  <!-- Section Society -->
+  <string name="section_society">society</string>
+  <!-- Section Sport -->
+  <string name="section_sport">sport</string>
+  <!-- Section Technology -->
+  <string name="section_tech">technology</string>
+  <!-- Section Travel -->
+  <string name="section_travel">travel</string>
+  <!-- Section Weather -->
+  <string name="section_weather">weather</string>
+  <!-- Section World -->
+  <string name="section_world">world</string>
+
+  <!-- = = = = = Query Parameters = = = = = -->
+  <!-- Query Parameter -->
+  <string name="param_query">q</string>
+  <!-- API Key Parameter -->
+  <string name="param_api">api-key</string>
+
+  <!-- = = = = = = = = = = Story Item = = = = = = = = = = -->
+  <!-- Story Web Title -->
+  <string name="story_web_title">News Title</string>
+  <!-- Story Section Name -->
+  <string name="story_section_name">Section Name</string>
+  <!-- Story Web URL -->
+  <string name="story_web_url">https://www.example.com/section/news-article</string>
+  <!-- Story Publication Date -->
+  <string name="story_publication_date">2020–12–03T00:14:24Z</string>
 </resources>
