@@ -1,5 +1,7 @@
 package com.example.newsq;
 
+import java.util.List;
+
 /**
  * A custom object class for news stories.
  */
@@ -13,13 +15,7 @@ public class Story {
   private String webTitle;
   private String webUrl;
   private String apiUrl;
-
-  /**
-   * Default constructor
-   */
-  public Story() {
-    // Default public constructor
-  }
+  private List<String> contributors;
 
   /**
    * ArrayList constructor
@@ -32,9 +28,11 @@ public class Story {
    * @param webTitle           A string that contains the web title.
    * @param webUrl             A string that contains the web url.
    * @param apiUrl             A string that contains the api url.
+   * @param contributors       A string array that contains the story contributors
    */
   public Story(String id, String type, String sectionId, String sectionName,
-      String webPublicationDate, String webTitle, String webUrl, String apiUrl) {
+      String webPublicationDate, String webTitle, String webUrl, String apiUrl,
+      List<String> contributors) {
     this.id = id;
     this.type = type;
     this.sectionId = sectionId;
@@ -43,6 +41,7 @@ public class Story {
     this.webTitle = webTitle;
     this.webUrl = webUrl;
     this.apiUrl = apiUrl;
+    this.contributors = contributors;
   }
 
   /**
@@ -187,6 +186,24 @@ public class Story {
    */
   public void setType(String type) {
     this.type = type;
+  }
+
+  /**
+   * Returns the story's contributors.
+   *
+   * @return A string list that contains the story's contributors.
+   */
+  public List<String> getContributors() {
+    return contributors;
+  }
+
+  /**
+   * Assigns the story's contributors.
+   *
+   * @param contributor A string list that contains the story's contributors.
+   */
+  public void setContributors(List<String> contributor) {
+    this.contributors = contributor;
   }
 }
 
