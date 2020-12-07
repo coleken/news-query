@@ -23,14 +23,13 @@ import org.json.JSONObject;
 
 /**
  * A utility class that contains the {@link HttpConnectionClient HttpConnectionClient} class and
- * helper methods to build {@link Uri}s, {@link URL}s,
+ * helper methods to build {@link Uri Uris}, {@link URL URLs}, and parse API responses.
  */
 public final class QueryUtils {
 
-  // Private
   private static final String LOG_TAG = QueryUtils.class.getSimpleName();
-  // Public
   public static String httpResponseMessage;
+
   public static boolean responseOK = HttpConnectionClient.responseOk;
   private static final String JSON_RESPONSE = "response";
   private static final String JSON_RESULTS = "results";
@@ -69,6 +68,26 @@ public final class QueryUtils {
       return null;
     }
     return extractNewsStories(response);
+  }
+
+  /**
+   * Returns a new {@link URL} created from the given {@link Uri}.
+   *
+   * @param uri A {@link String} that contains a {@link Uri} for an API request.
+   * @return A {@link URL} object formatted for an API request.
+   */
+  public static URL createUrl(String uri) {
+    if (uri == null) {
+      return null;
+    }
+    URL url;
+    try {
+      url = new URL(uri);
+    } catch (MalformedURLException e) {
+      Log.e(LOG_TAG, "Error creating URL", e);
+      return null;
+    }
+    return url;
   }
 
   /**
@@ -115,7 +134,7 @@ public final class QueryUtils {
           JSONArray tagsArray = storyAttribute.getJSONArray(TAGS);
           List<String> contributors = new ArrayList<>();
           for (int j = 0; j < tagsArray.length(); j++) {
-            // Tag Object
+            // Tags object that contains the story contributors
             JSONObject storyContributor = tagsArray.getJSONObject(j);
             contributors.add(storyContributor.getString(WEB_TITLE));
           }
@@ -129,26 +148,6 @@ public final class QueryUtils {
       }
     }
     return stories;
-  }
-
-  /**
-   * Returns a new {@link URL} created from the given {@link Uri}.
-   *
-   * @param uri A {@link String} that contains a {@link Uri} for an API request.
-   * @return A {@link URL} object formatted for an API request.
-   */
-  private static URL createUrl(String uri) {
-    if (uri == null) {
-      return null;
-    }
-    URL url;
-    try {
-      url = new URL(uri);
-    } catch (MalformedURLException e) {
-      Log.e(LOG_TAG, "Error creating URL", e);
-      return null;
-    }
-    return url;
   }
 
   /**
@@ -209,7 +208,7 @@ public final class QueryUtils {
     }
 
     /**
-     * Returns a {@link Boolean} to indicate if the device is currently connected to the network. r
+     * Returns a {@link Boolean} to indicate if the device is currently connected to the network.
      *
      * @param context The {@link Context} from the current {@link android.app.Activity}.
      * @return A {@link Boolean} that indicates if the device is connected to the network.
