@@ -17,6 +17,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,13 +51,14 @@ public final class QueryUtils {
   }
 
   /**
-   * Requests news data from the API and returns it in an array list of custom news objects.
+   * Requests news data from the API and returns it in an array list of custom {@link Story}
+   * objects.
    * <p>
    * Calls to: {@link #delayNewsFetch()}, {@link HttpConnectionClient#getHttpResponse(URL)}, and
    * {@link #extractNewsStories(String)}
    *
-   * @param urlString A {@link URL} built for a specific API request.
-   * @return An {@link ArrayList} of news objects obtained from the API request.
+   * @param urlString A {@link String} that contains a url for a specific API request.
+   * @return An {@link ArrayList} of {@link Story} objects obtained from the API request.
    */
   public static ArrayList<Story> fetchNews(String urlString) {
     // Pause thread for loading indicator
@@ -94,14 +96,14 @@ public final class QueryUtils {
    * @return A {@link URL} object formatted for an API request.
    */
   private static URL createUrl(String uri) {
-    if (uri == null) {
+    if (isNullOrEmpty(uri)) {
       return null;
     }
     URL url;
     try {
       url = new URL(uri);
     } catch (MalformedURLException e) {
-      Log.e(LOG_TAG, "Error creating URL", e);
+      Log.e(LOG_TAG, "An error occurred while creating URL.", e);
       return null;
     }
     return url;
@@ -117,7 +119,7 @@ public final class QueryUtils {
   @NonNull
   private static ArrayList<Story> extractNewsStories(String response) {
     ArrayList<Story> stories = new ArrayList<>();
-    if (response != null && HttpConnectionClient.responseOk) {
+    if (!isNullOrEmpty(response) && HttpConnectionClient.responseOk) {
       try {
         // Complete response object
         JSONObject responseData = new JSONObject(response).getJSONObject(JSON_RESPONSE);
@@ -163,29 +165,85 @@ public final class QueryUtils {
    */
   public static String createUri(@NonNull Map<String, String> uriSegments) {
     Uri.Builder builder = new Uri.Builder();
-    if (uriSegments.containsKey(null) || uriSegments.containsValue(null)) {
+    final String scheme = "scheme";
+    final String authority = "authority";
+    final String path = "path";
+    final String apiKey = "api-key";
+    if (isNullOrEmpty(uriSegments)) {
       return null;
     } else {
       for (Map.Entry<String, String> parametersEntry : uriSegments.entrySet()) {
         String key = parametersEntry.getKey();
         switch (key) {
-          case "scheme":
+          case scheme:
             builder.scheme(parametersEntry.getValue());
             break;
-          case "authority":
+          case authority:
             builder.authority(parametersEntry.getValue());
             break;
-          case "path":
+          case path:
             builder.appendPath(parametersEntry.getValue());
             break;
           default:
             builder.appendQueryParameter(parametersEntry.getKey(), parametersEntry.getValue());
-            builder.appendQueryParameter("api-key", HttpConnectionClient.getApiKey());
+            builder.appendQueryParameter(apiKey, HttpConnectionClient.getApiKey());
             break;
         }
       }
     }
     return builder.build().toString();
+  }
+
+  /**
+   * Checks if the given {@link ArrayList} is null or empty.
+   *
+   * @param stories An {@link ArrayList} of {@link Story} objects.
+   * @return A {@link Boolean} true if the {@link ArrayList} is empty or null, and false if it's
+   * not.
+   */
+  public static boolean isNullOrEmpty(ArrayList<Story> stories) {
+    boolean isNullOrEmpty = false;
+    if (stories == null || stories.isEmpty()) {
+      isNullOrEmpty = true;
+    }
+    return isNullOrEmpty;
+  }
+
+  /**
+   * Checks if the given {@link String} is null or empty.
+   *
+   * @param string A {@link String} object.
+   * @return True if the string is empty or null, and false if it's not.
+   */
+  public static boolean isNullOrEmpty(String string) {
+    boolean isNullOrEmpty = false;
+    if (string == null || string.isEmpty()) {
+      isNullOrEmpty = true;
+    }
+    return isNullOrEmpty;
+  }
+
+  /**
+   * Checks if the given {@link Map} is empty, or has empty/null keys or values.
+   *
+   * @param map A {@link Map} of keys and values used to build a {@link Uri}.
+   * @return True if the map is empty or contains empty/null keys or values, and false if it
+   * doesn't.
+   */
+  private static boolean isNullOrEmpty(Map<String, String> map) {
+    boolean isNullOrEmpty = false;
+    if (map == null || map.isEmpty()) {
+      isNullOrEmpty = true;
+    } else if (map.containsKey(null) || map.containsValue(null)) {
+      isNullOrEmpty = true;
+    } else {
+      for (Entry<String, String> mapEntry : map.entrySet()) {
+        if (mapEntry.getKey().isEmpty() || mapEntry.getValue().isEmpty()) {
+          isNullOrEmpty = true;
+        }
+      }
+    }
+    return isNullOrEmpty;
   }
 
   /**
