@@ -30,7 +30,6 @@ public final class QueryUtils {
   private static final String LOG_TAG = QueryUtils.class.getSimpleName();
   public static String httpResponseMessage;
 
-  public static boolean responseOK = HttpConnectionClient.responseOk;
   private static final String JSON_RESPONSE = "response";
   private static final String JSON_RESULTS = "results";
   private static final String TAGS = "tags";
@@ -56,38 +55,24 @@ public final class QueryUtils {
    * Calls to: {@link #delayNewsFetch()}, {@link HttpConnectionClient#getHttpResponse(URL)}, and
    * {@link #extractNewsStories(String)}
    *
-   * @param url A {@link URL} built for a specific API request.
+   * @param urlString A {@link URL} built for a specific API request.
    * @return An {@link ArrayList} of news objects obtained from the API request.
    */
-  public static ArrayList<Story> fetchNews(URL url) {
+  public static ArrayList<Story> fetchNews(String urlString) {
+    // Pause thread for loading indicator
     delayNewsFetch();
+    // Create URL
+    URL url = createUrl(urlString);
+    // Retrieve API response
     String response = HttpConnectionClient.getHttpResponse(url);
-    // Assign the bad response for reference
-    if (!HttpConnectionClient.responseOk) {
+    if (HttpConnectionClient.responseOk) {
+      // Return ArrayList of news stories
+      return extractNewsStories(response);
+    } else {
+      // Assign a bad response for reference
       httpResponseMessage = response;
       return null;
     }
-    return extractNewsStories(response);
-  }
-
-  /**
-   * Returns a new {@link URL} created from the given {@link Uri}.
-   *
-   * @param uri A {@link String} that contains a {@link Uri} for an API request.
-   * @return A {@link URL} object formatted for an API request.
-   */
-  public static URL createUrl(String uri) {
-    if (uri == null) {
-      return null;
-    }
-    URL url;
-    try {
-      url = new URL(uri);
-    } catch (MalformedURLException e) {
-      Log.e(LOG_TAG, "Error creating URL", e);
-      return null;
-    }
-    return url;
   }
 
   /**
@@ -100,6 +85,26 @@ public final class QueryUtils {
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
+  }
+
+  /**
+   * Returns a new {@link URL} created from the given {@link Uri}.
+   *
+   * @param uri A {@link String} that contains a {@link Uri} for an API request.
+   * @return A {@link URL} object formatted for an API request.
+   */
+  private static URL createUrl(String uri) {
+    if (uri == null) {
+      return null;
+    }
+    URL url;
+    try {
+      url = new URL(uri);
+    } catch (MalformedURLException e) {
+      Log.e(LOG_TAG, "Error creating URL", e);
+      return null;
+    }
+    return url;
   }
 
   /**
@@ -184,6 +189,15 @@ public final class QueryUtils {
   }
 
   /**
+   * Returns a boolean to indicate if the HTTP response didn't include a status code of 200.
+   *
+   * @return True if the HTTP response was valid, False if the response wasn't valid.
+   */
+  public static boolean isIsResponseValid() {
+    return HttpConnectionClient.responseOk;
+  }
+
+  /**
    * Returns a boolean to indicate if the device is currently connected to the network.
    *
    * @see HttpConnectionClient#isDeviceConnected(Context)
@@ -227,7 +241,7 @@ public final class QueryUtils {
     /**
      * Connects to the API and returns the response in a string.
      * <p>
-     * Calls to: {@link #readInputStream(HttpURLConnection)}
+     * Calls: {@link #readInputStream(HttpURLConnection)}
      *
      * @param url A {@link URL} object formatted for an API request.
      * @return A {@link String} that contains the API response data.
