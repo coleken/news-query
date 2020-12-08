@@ -121,7 +121,7 @@ public final class QueryUtils {
     ArrayList<Story> stories = new ArrayList<>();
     if (!isNullOrEmpty(response) && HttpConnectionClient.responseOk) {
       try {
-        // Complete response object
+        // Get response object
         JSONObject responseData = new JSONObject(response).getJSONObject(JSON_RESPONSE);
         // Extract results array
         JSONArray newsArray = responseData.getJSONArray(JSON_RESULTS);
@@ -247,7 +247,7 @@ public final class QueryUtils {
   }
 
   /**
-   * Returns a boolean to indicate if the HTTP response didn't include a status code of 200.
+   * Returns {@link Boolean} to indicate if the HTTP response code is 200.
    *
    * @return True if the HTTP response was valid, False if the response wasn't valid.
    */
@@ -256,7 +256,7 @@ public final class QueryUtils {
   }
 
   /**
-   * Returns a boolean to indicate if the device is currently connected to the network.
+   * Returns a {@link Boolean} to indicate if the device is currently connected to the network.
    *
    * @see HttpConnectionClient#isDeviceConnected(Context)
    */
