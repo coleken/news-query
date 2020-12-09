@@ -259,7 +259,7 @@ public final class QueryUtils {
    * @return A {@link Boolean} value of true if the response is valid, and false if it isn't.
    * @see HttpConnectionClient#responseOk
    */
-  public static boolean isIsResponseValid() {
+  public static boolean isResponseValid() {
     return HttpConnectionClient.responseOk;
   }
 
