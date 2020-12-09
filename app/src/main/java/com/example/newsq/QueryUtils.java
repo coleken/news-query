@@ -54,8 +54,8 @@ public final class QueryUtils {
    * Requests news data from the API and returns it in an array list of custom {@link Story}
    * objects.
    * <p>
-   * Calls to: {@link #delayNewsFetch()}, {@link HttpConnectionClient#getHttpResponse(URL)}, and
-   * {@link #extractNewsStories(String)}
+   * Calls: {@link #delayNewsFetch()}, {@link HttpConnectionClient#getHttpResponse(URL)}, and {@link
+   * #extractNewsStories(String)}
    *
    * @param urlString A {@link String} that contains a url for a specific API request.
    * @return An {@link ArrayList} of {@link Story} objects obtained from the API request.
@@ -79,6 +79,8 @@ public final class QueryUtils {
 
   /**
    * Puts the current thread to sleep for showing the circular progress bar.
+   * <p>
+   * Called by: {@link #fetchNews(String)}
    */
   private static void delayNewsFetch() {
     final int time = 2000; // in milliseconds
@@ -90,7 +92,9 @@ public final class QueryUtils {
   }
 
   /**
-   * Returns a new {@link URL} created from the given {@link Uri}.
+   * Returns a new {@link URL} created from the given {@link String}.
+   * <p>
+   * Called by: {@link #fetchNews(String)}
    *
    * @param uri A {@link String} that contains a {@link Uri} for an API request.
    * @return A {@link URL} object formatted for an API request.
@@ -112,6 +116,8 @@ public final class QueryUtils {
   /**
    * Extracts news stories from the HTTP response retrieved by {@link
    * HttpConnectionClient#getHttpResponse(URL) getHttpResponse}.
+   * <p>
+   * Called by: {@link #fetchNews(String)}
    *
    * @param response A {@link String} that contains the response data.
    * @return An {@link ArrayList} of news objects obtained from the API request.
@@ -158,7 +164,8 @@ public final class QueryUtils {
   }
 
   /**
-   * Returns a {@link Uri} reference constructed with the given parameters for an API request.
+   * Creates a {@link Uri} reference constructed with the given parameters for an API request, then
+   * returns it in a {@link String}.
    *
    * @param uriSegments A {@link Map} of keys and values used to build a {@link Uri}.
    * @return A {@link String} that contains a {@link Uri} built with the given parameters.
@@ -198,8 +205,8 @@ public final class QueryUtils {
    * Checks if the given {@link ArrayList} is null or empty.
    *
    * @param stories An {@link ArrayList} of {@link Story} objects.
-   * @return A {@link Boolean} true if the {@link ArrayList} is empty or null, and false if it's
-   * not.
+   * @return A {@link Boolean} value of true if the {@link ArrayList} is empty or null, and false if
+   * it isn't.
    */
   public static boolean isNullOrEmpty(ArrayList<Story> stories) {
     boolean isNullOrEmpty = false;
@@ -213,7 +220,7 @@ public final class QueryUtils {
    * Checks if the given {@link String} is null or empty.
    *
    * @param string A {@link String} object.
-   * @return True if the string is empty or null, and false if it's not.
+   * @return A {@link Boolean} value of true if the string is null or empty, and false if it isn't.
    */
   public static boolean isNullOrEmpty(String string) {
     boolean isNullOrEmpty = false;
@@ -227,8 +234,8 @@ public final class QueryUtils {
    * Checks if the given {@link Map} is empty, or has empty/null keys or values.
    *
    * @param map A {@link Map} of keys and values used to build a {@link Uri}.
-   * @return True if the map is empty or contains empty/null keys or values, and false if it
-   * doesn't.
+   * @return A {@link Boolean} value of true if the map is empty or contains empty/null keys or
+   * values, and false if it doesn't.
    */
   private static boolean isNullOrEmpty(Map<String, String> map) {
     boolean isNullOrEmpty = false;
@@ -247,9 +254,10 @@ public final class QueryUtils {
   }
 
   /**
-   * Returns {@link Boolean} to indicate if the HTTP response code is 200.
+   * Returns a {@link Boolean} to indicate if the HTTP response code is valid.
    *
-   * @return True if the HTTP response was valid, False if the response wasn't valid.
+   * @return A {@link Boolean} value of true if the response is valid, and false if it isn't.
+   * @see HttpConnectionClient#responseOk
    */
   public static boolean isIsResponseValid() {
     return HttpConnectionClient.responseOk;
@@ -258,6 +266,7 @@ public final class QueryUtils {
   /**
    * Returns a {@link Boolean} to indicate if the device is currently connected to the network.
    *
+   * @return A {@link Boolean} value of true if the device is connected, and false if it isn't.
    * @see HttpConnectionClient#isDeviceConnected(Context)
    */
   public static boolean isDeviceConnected(Context context) {
@@ -270,6 +279,12 @@ public final class QueryUtils {
   private final static class HttpConnectionClient {
 
     private static final String LOG_TAG = HttpURLConnection.class.getSimpleName();
+    /**
+     * A {@link Boolean} Boolean with a state of true if the HTTP response is valid (code 200), and
+     * false if the response is invalid.
+     *
+     * @see #getHttpResponse(URL)
+     */
     private static boolean responseOk;
 
     /**
@@ -297,9 +312,14 @@ public final class QueryUtils {
     }
 
     /**
-     * Connects to the API and returns the response in a string.
+     * Connects to the API and returns the response in a {@link String}. This method is also
+     * responsible for setting the {@link #responseOk} {@link Boolean} to true for valid responses
+     * and false for invalid responses.
+     *
      * <p>
      * Calls: {@link #readInputStream(HttpURLConnection)}
+     * <p>
+     * Called by: {@link #fetchNews(String)}
      *
      * @param url A {@link URL} object formatted for an API request.
      * @return A {@link String} that contains the API response data.
@@ -338,7 +358,8 @@ public final class QueryUtils {
     }
 
     /**
-     * A helper method that reads from the input stream and converts it into a string.
+     * A helper method that reads from the {@link java.io.InputStream InputStream} and converts it
+     * into a {@link String}.
      * <p>
      * Called by: {@link #getHttpResponse(URL)}
      *
@@ -365,7 +386,7 @@ public final class QueryUtils {
     /**
      * Retrieves, decodes, and returns the API key.
      *
-     * @return A string that contains the api key.
+     * @return A {@link String} that contains the api key.
      */
     @NonNull
     private static String getApiKey() {
