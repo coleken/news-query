@@ -393,7 +393,7 @@ public final class QueryUtils {
       // Retrieve API key from build config
       String encodedKey = com.example.newsq.BuildConfig.API_KEY;
       // Decode the API key
-      byte[] bytes = Base64.decode(encodedKey, Base64.DEFAULT);
+      byte[] bytes = Base64.decode(encodedKey, Base64.URL_SAFE);
       // Return the converted key
       return new String(bytes, StandardCharsets.UTF_8);
     }
