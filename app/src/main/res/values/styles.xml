@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!-- = = = = = = = = = = = = = = = = = = = View Styles = = = = = = = = = = = = = = = = = = = -->
+
+  <!-- = = = = = = = = = = Parent Styles = = = = = = = = = = -->
+  <!-- Text Style -->
+  <style name="style_parent_text_view" parent="Theme.NewsQ">
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:textColor">@color/colorPrimaryText</item>
+  </style>
+
+  <!-- = = = = = = = = = = activity_main = = = = = = = = = = -->
+  <!-- Constraint Layout -->
+  <style name="style_main_constraint_layout">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">match_parent</item>
+    <item name="android:layout_marginTop">@dimen/main_layout_margin_top</item>
+  </style>
+  <!-- Nav Host Fragment-->
+  <style name="style_layout_host_fragment">
+    <item name="android:layout_height">match_parent</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:name">androidx.navigation.fragment.NavHostFragment</item>
+  </style>
+  <!-- Nav View -->
+  <style name="style_layout_nav_view">
+    <item name="android:layout_width">@dimen/zero_height_width</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_marginEnd">@dimen/zero_height_width</item>
+    <item name="android:layout_marginStart">@dimen/zero_height_width</item>
+    <item name="android:background">?android:attr/windowBackground</item>
+  </style>
+
+  <!-- = = = = = = = = = = story_item = = = = = = = = = = -->
+  <!-- Story Item Card View -->
+  <style name="style_story_cardview" parent="Theme.NewsQ">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_margin">@dimen/cardview_margin</item>
+    <item name="android:elevation">@dimen/cardview_elevation</item>
+    <item name="android:gravity">center</item>
+    <item name="android:background">?selectableItemBackground</item>
+    <item name="android:clickable">true</item>
+  </style>
+  <!-- Story Web Title -->
+  <style name="style_story_title" parent="style_parent_text_view">
+    <item name="android:textSize">@dimen/story_title_text_size</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_margin">@dimen/list_item_margin</item>
+    <item name="android:text">@string/story_web_title</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:background">?selectableItemBackground</item>
+  </style>
+  <!-- Story Trail Text -->
+  <style name="style_story_trail_text" parent="style_parent_text_view">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:textSize">@dimen/story_content_text_size</item>
+    <item name="android:layout_margin">@dimen/list_item_margin</item>
+    <item name="android:text">@string/string_story_trail_text</item>
+    <item name="android:background">?selectableItemBackground</item>
+  </style>
+  <!-- Story Resource -->
+  <style name="style_story_resource" parent="style_parent_text_view">
+    <item name="android:textSize">@dimen/story_content_text_size</item>
+    <item name="android:text">@string/story_resource</item>
+    <item name="android:layout_marginTop">@dimen/title_content_separation_margin</item>
+    <item name="android:layout_marginBottom">@dimen/list_item_margin</item>
+    <item name="android:layout_marginEnd">@dimen/list_item_margin</item>
+    <item name="android:layout_marginStart">@dimen/list_item_margin</item>
+    <item name="android:background">?selectableItemBackground</item>
+    <item name="android:textColor">@color/colorSecondaryText</item>
+  </style>
+  <!-- Story Byline -->
+  <style name="style_story_byline" parent="style_parent_text_view">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:textSize">@dimen/story_content_text_size</item>
+    <item name="android:layout_marginTop">@dimen/list_item_margin</item>
+    <item name="android:layout_marginBottom">@dimen/list_item_margin</item>
+    <item name="android:layout_marginEnd">@dimen/list_item_margin</item>
+    <item name="android:layout_marginStart">@dimen/list_item_margin</item>
+    <item name="android:text">@string/string_story_byline</item>
+    <item name="android:background">?selectableItemBackground</item>
+    <item name="android:textColor">@color/colorSecondaryText</item>
+  </style>
+  <!-- Story Section Name -->
+  <style name="style_story_section_name" parent="style_parent_text_view">
+    <item name="android:textSize">@dimen/story_content_text_size</item>
+    <item name="android:text">@string/story_section_name</item>
+    <item name="android:layout_margin">@dimen/list_item_margin</item>
+    <item name="android:background">?selectableItemBackground</item>
+    <item name="android:textColor">@color/colorSecondaryText</item>
+  </style>
+  <!-- Story Publication Date -->
+  <style name="style_story_publication_date" parent="style_parent_text_view">
+    <item name="android:textSize">@dimen/story_content_text_size</item>
+    <item name="android:text">@string/story_publication_date</item>
+    <item name="android:layout_marginTop">@dimen/title_content_separation_margin</item>
+    <item name="android:layout_marginBottom">@dimen/list_item_margin</item>
+    <item name="android:layout_marginEnd">@dimen/list_item_margin</item>
+    <item name="android:layout_marginStart">@dimen/list_item_margin</item>
+    <item name="android:background">?selectableItemBackground</item>
+    <item name="android:textColor">@color/colorSecondaryText</item>
+  </style>
+  <!-- List View -->
+  <style name="style_listview_recyclerview" parent="Theme.NewsQ">
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_width">match_parent</item>
+  </style>
+
+  <!-- = = = = = = = = = = fragment_world = = = = = = = = = = -->
+  <!-- Progress Bar -->
+  <style name="style_fragment_progress_bar">
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_width">wrap_content</item>
+  </style>
+  <!-- Multipurpose TextView -->
+  <style name="style_fragment_multipurpose_textview" parent="style_parent_text_view">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:textSize">15sp</item>
+    <item name="android:layout_height">30dp</item>
+    <item name="android:layout_margin">8dp</item>
+    <item name="android:textAlignment">center</item>
+  </style>
+  <!-- Status Layout -->
+  <style name="style_fragment_status_layout">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">@dimen/status_layout_height</item>
+    <item name="android:paddingEnd">@dimen/status_layout_padding</item>
+    <item name="android:paddingStart">@dimen/status_layout_padding</item>
+    <item name="android:layout_marginBottom">@dimen/status_layout_margin_bottom</item>
+    <item name="android:background">?android:attr/windowBackground</item>
+    <item name="android:elevation">@dimen/status_layout_elevation</item>
+  </style>
+  <!-- Status Label -->
+  <style name="style_fragment_status_label_textview" parent="style_parent_text_view">
+    <item name="android:layout_margin">@dimen/status_textview_margin</item>
+  </style>
+  <!-- Status -->
+  <style name="style_fragment_status_textview" parent="style_parent_text_view">
+    <item name="android:layout_margin">@dimen/status_textview_margin</item>
+  </style>
+
+</resources>

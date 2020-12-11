@@ -2,4 +2,45 @@
   <!-- Default screen margins, per the Android Design guidelines. -->
   <dimen name="activity_horizontal_margin">16dp</dimen>
   <dimen name="activity_vertical_margin">16dp</dimen>
+
+  <!-- = = = = = = = = = = activity_main = = = = = = = = = = -->
+  <!-- Constraint Layout Margin Top -->
+  <dimen name="main_layout_margin_top">10dp</dimen>
+
+  <!-- = = = = = = = = = = Fragment Status Layout = = = = = = = = = = -->
+  <!-- Layout Height -->
+  <dimen name="status_layout_height">30dp</dimen>
+  <!-- Layout Padding -->
+  <dimen name="status_layout_padding">12dp</dimen>
+  <!-- Layout Bottom Largin-->
+  <dimen name="status_layout_margin_bottom">5dp</dimen>
+  <!-- Layout Elevation-->
+  <dimen name="status_layout_elevation">2dp</dimen>
+  <!-- Status TextView Margin -->
+  <dimen name="status_textview_margin">5dp</dimen>
+
+  <!-- = = = = = = = = = = News Story Attributes = = = = = = = = = = -->
+  <!-- = = = = = = Attribute Margin Sizes = = = = = = -->
+  <!-- List Item Margin -->
+  <dimen name="list_item_margin">5dp</dimen>
+  <!-- Story Contributor Margin Top/Bottom -->
+  <dimen name="title_content_separation_margin">10dp</dimen>
+  <!-- = = = = = = Attribute Text Sizes = = = = = = -->
+  <!-- Story Content Text Size-->
+  <dimen name="story_content_text_size">12sp</dimen>
+  <!-- Story Title Text Size -->
+  <dimen name="story_title_text_size">14sp</dimen>
+
+  <!-- = = = = = = = = = = Card View = = = = = = = = = = -->
+  <!-- Card View Layout Margin -->
+  <dimen name="cardview_margin">5dp</dimen>
+  <!-- Card View Elevation -->
+  <dimen name="cardview_elevation">7dp</dimen>
+  <!--Card View Corner Radius -->
+  <dimen name="cardview_corner_radius">3dp</dimen>
+
+  <!-- = = = = = = = = = = General Values = = = = = = = = = = -->
+  <!-- Zero Height/Width Values -->
+  <dimen name="zero_height_width">0dp</dimen>
+
 </resources>

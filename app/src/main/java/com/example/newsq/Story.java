@@ -5,7 +5,6 @@ package com.example.newsq;
  */
 public class Story {
 
-  private final String id;
   private final String sectionName;
   private final String webPublicationDate;
   private final String webUrl;
@@ -16,7 +15,6 @@ public class Story {
   /**
    * ArrayList constructor
    *
-   * @param id                 A string that contains the id.
    * @param sectionName        A string that contains the section name.
    * @param webPublicationDate A string that contains the web publication date.
    * @param webUrl             A string that contains the web url.
@@ -24,25 +22,15 @@ public class Story {
    * @param byline             A string that contains the byline.
    * @param trailText          A string that contains the trail text.
    */
-  public Story(String id, String sectionName,
-      String webPublicationDate, String webUrl, String headline, String byline, String trailText) {
+  public Story(String headline, String byline, String trailText, String sectionName,
+      String webPublicationDate, String webUrl) {
 
-    this.id = id;
-    this.sectionName = sectionName;
-    this.webPublicationDate = webPublicationDate;
-    this.webUrl = webUrl;
     this.headline = headline;
     this.byline = byline;
     this.trailText = trailText;
-  }
-
-  /**
-   * Returns a {@link String} with the story's id.
-   *
-   * @return A string that contains the id.
-   */
-  public String getId() {
-    return id;
+    this.sectionName = sectionName;
+    this.webPublicationDate = webPublicationDate;
+    this.webUrl = webUrl;
   }
 
   /**

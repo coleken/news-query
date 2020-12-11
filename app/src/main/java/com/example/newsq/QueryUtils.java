@@ -33,7 +33,6 @@ public final class QueryUtils {
   private static final String JSON_RESPONSE = "response";
   private static final String JSON_RESULTS = "results";
   private static final String JSON_FIELDS = "fields";
-  private static final String ID = "id";
   private static final String SECTION_NAME = "sectionName";
   private static final String WEB_PUBLICATION_DATE = "webPublicationDate";
   private static final String WEB_URL = "webUrl";
@@ -130,10 +129,8 @@ public final class QueryUtils {
         // Extract results array
         JSONArray newsArray = responseData.getJSONArray(JSON_RESULTS);
         for (int i = 0; i < newsArray.length(); i++) {
-          // Extract news story object
+          // Extract story attributes
           JSONObject storyAttribute = newsArray.getJSONObject(i);
-          // Initialize story attributes
-          String id = storyAttribute.getString(ID);
           String sectionName = storyAttribute.getString(SECTION_NAME);
           String webPublicationDate = storyAttribute.getString(WEB_PUBLICATION_DATE);
           String webUrl = storyAttribute.getString(WEB_URL);
@@ -144,7 +141,7 @@ public final class QueryUtils {
           String trailText = responseFields.getString(TRAIL_TEXT);
           // Add all attributes to a new story object
           stories.add(
-              new Story(id, sectionName, webPublicationDate, webUrl, headline, byline, trailText));
+              new Story(headline, byline, trailText, sectionName, webPublicationDate, webUrl));
         }
       } catch (JSONException e) {
         Log.e(LOG_TAG, "Problem parsing JSON response", e);
