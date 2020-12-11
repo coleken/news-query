@@ -8,10 +8,62 @@
   <string name="title_browse">Browse</string>
   <!-- Search Menu Title -->
   <string name="title_search">Search</string>
+  <!-- App Bar World Title -->
+  <string name="title_app_world">News Q - World News</string>
+  <!-- App Bar Browse Title -->
+  <string name="title_app_browse">News Q - Browse News</string>
+  <!-- App Bar Search Title -->
+  <string name="title_app_search">News Q - Search News</string>
 
   <!-- = = = = = = = = = = Browse Fragment Text = = = = = = = = = = -->
   <!-- Browse Sections Spinner Text -->
   <string name="default_spinner_text">Select a category</string>
+  <!-- Section Art & Design -->
+  <string name="spinner_art_and_design">Art &amp; Design</string>
+  <!-- Section Business -->
+  <string name="spinner_business">Business</string>
+  <!-- Section Cities -->
+  <string name="spinner_cities">Cities</string>
+  <!-- Section Culture -->
+  <string name="spinner_culture">Culture</string>
+  <!-- Section Education -->
+  <string name="spinner_education">Education</string>
+  <!-- Section Environment -->
+  <string name="spinner_environment">Environment</string>
+  <!-- Section Fashion -->
+  <string name="spinner_fashion">Fashion</string>
+  <!-- Section Film -->
+  <string name="spinner_film">Film</string>
+  <!-- Section Food -->
+  <string name="spinner_food">Food</string>
+  <!-- Section Inequality -->
+  <string name="spinner_inequality">Inequality</string>
+  <!-- Section Law -->
+  <string name="spinner_law">Law</string>
+  <!-- Section Life & Style -->
+  <string name="spinner_life_and_style">Life &amp; Style</string>
+  <!-- Section Money -->
+  <string name="spinner_money">Money</string>
+  <!-- Section Music -->
+  <string name="spinner_music">Music</string>
+  <!-- Section News -->
+  <string name="spinner_news">News</string>
+  <!-- Section Politics -->
+  <string name="spinner_politics">Politics</string>
+  <!-- Section Science -->
+  <string name="spinner_science">Science</string>
+  <!-- Section Society -->
+  <string name="spinner_society">Society</string>
+  <!-- Section Sport -->
+  <string name="spinner_sport">Sports</string>
+  <!-- Section Technology -->
+  <string name="spinner_tech">Technology</string>
+  <!-- Section Travel -->
+  <string name="spinner_travel">Travel</string>
+  <!-- Section Weather -->
+  <string name="spinner_weather">Weather</string>
+  <!-- Section World -->
+  <string name="spinner_world">World</string>
 
   <!-- = = = = = = = = = = Search Fragment Text = = = = = = = = = = -->
   <!-- Search EditText Field Hint -->
@@ -19,10 +71,17 @@
 
   <!-- = = = = = = = = = = API Query Text = = = = = = = = = = -->
   <!-- = = = = = Base URL = = = = = -->
-  <!-- Scheme -->
-  <string name="uri_scheme">https</string>
-  <!-- Authority -->
-  <string name="uri_authority">content.guardianapis.com</string>
+  <!-- Map Scheme Key -->
+  <string name="uri_scheme_key">scheme</string>
+  <!-- Map Scheme Value -->
+  <string name="uri_scheme_value">https</string>
+  <!-- Map Authority Key -->
+  <string name="uri_authority_key">authority</string>
+  <!-- Map Authority Value -->
+  <string name="uri_authority_value">content.guardianapis.com</string>
+  <!-- Map Path Key -->
+  <string name="uri_path_key">path</string>
+  <!-- Map Path Values (Endpoints & Sections) -->
   <!-- = = = = = Endpoints = = = = = -->
   <!-- Endpoint Editions -->
   <string name="endpoint_editions">editions</string>
@@ -79,20 +138,46 @@
   <string name="section_weather">weather</string>
   <!-- Section World -->
   <string name="section_world">world</string>
-
   <!-- = = = = = Query Parameters = = = = = -->
   <!-- Query Parameter -->
   <string name="param_query">q</string>
-  <!-- API Key Parameter -->
-  <string name="param_api">api-key</string>
-
+  <!-- API Key Parameter Key -->
+  <string name="param_key_api">api-key</string>
+  <!-- Show Tags Parameter Key -->
+  <string name="param_key_show_tags">show-tags</string>
+  <!-- Contributors Parameter Value -->
+  <string name="param_value_contributors">contributor</string>
+  <!-- Show Fields Parameter Key -->
+  <string name="param_key_show_fields">show-fields</string>
+  <!-- Body Text Parameter Value -->
+  <string name="param_value_multiple_fields">headline,byline,trailText,body-text</string>
   <!-- = = = = = = = = = = Story Item = = = = = = = = = = -->
+  <!-- Story Resource -->
+  <string name="story_resource">The Guardian</string>
   <!-- Story Web Title -->
   <string name="story_web_title">News Title</string>
+  <!-- Story Trail text -->
+  <string name="string_story_trail_text">News story trail text…</string>
   <!-- Story Section Name -->
   <string name="story_section_name">Section Name</string>
+  <!-- Story Type -->
+  <string name="story_type">Type</string>
   <!-- Story Web URL -->
-  <string name="story_web_url">https://www.example.com/section/news-article</string>
+  <string name="story_web_url">theguardian.com</string>
   <!-- Story Publication Date -->
-  <string name="story_publication_date">2020–12–03T00:14:24Z</string>
+  <string name="story_publication_date">Publication Date</string>
+  <!-- Story Contributors -->
+  <string name="string_story_byline">Contributors</string>
+  <!-- Story Alert Button Text -->
+  <string name="alert_button">Done</string>
+
+  <!-- = = = = = = = = = = Data & Connection Status Messages = = = = = = = = = = -->
+  <!-- No Internet connection message -->
+  <string name="no_network_connection">No Internet connection.</string>
+  <!-- For empty/null values in an API request & empty/null values in API responses  -->
+  <string name="problem_with_request">There was a problem with the request.</string>
+  <!-- Date retrieved label -->
+  <string name="date_retrieved">Date Retrieved: </string>
+  <!-- Error message label -->
+  <string name="error_label">Error: </string>
 </resources>
