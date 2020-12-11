@@ -1,51 +1,43 @@
 package com.example.newsq;
 
-import java.util.List;
-
 /**
  * A custom object class for news stories.
  */
 public class Story {
 
-  private String id;
-  private String type;
-  private String sectionId;
-  private String sectionName;
-  private String webPublicationDate;
-  private String webTitle;
-  private String webUrl;
-  private String apiUrl;
-  private List<String> contributors;
+  private final String id;
+  private final String sectionName;
+  private final String webPublicationDate;
+  private final String webUrl;
+  private final String headline;
+  private final String byline;
+  private final String trailText;
 
   /**
    * ArrayList constructor
    *
    * @param id                 A string that contains the id.
-   * @param type               A string that contains the type.
-   * @param sectionId          A string that contains the section id.
    * @param sectionName        A string that contains the section name.
    * @param webPublicationDate A string that contains the web publication date.
-   * @param webTitle           A string that contains the web title.
    * @param webUrl             A string that contains the web url.
-   * @param apiUrl             A string that contains the api url.
-   * @param contributors       A string array that contains the story contributors
+   * @param headline           A string that contains the headline.
+   * @param byline             A string that contains the byline.
+   * @param trailText          A string that contains the trail text.
    */
-  public Story(String id, String type, String sectionId, String sectionName,
-      String webPublicationDate, String webTitle, String webUrl, String apiUrl,
-      List<String> contributors) {
+  public Story(String id, String sectionName,
+      String webPublicationDate, String webUrl, String headline, String byline, String trailText) {
+
     this.id = id;
-    this.type = type;
-    this.sectionId = sectionId;
     this.sectionName = sectionName;
     this.webPublicationDate = webPublicationDate;
-    this.webTitle = webTitle;
     this.webUrl = webUrl;
-    this.apiUrl = apiUrl;
-    this.contributors = contributors;
+    this.headline = headline;
+    this.byline = byline;
+    this.trailText = trailText;
   }
 
   /**
-   * Returns the story's id.
+   * Returns a {@link String} with the story's id.
    *
    * @return A string that contains the id.
    */
@@ -54,34 +46,7 @@ public class Story {
   }
 
   /**
-   * Assigns the story's id.
-   *
-   * @param id A string that contains the id.
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  /**
-   * Returns the story's section id.
-   *
-   * @return A string that contains the section id.
-   */
-  public String getSectionId() {
-    return sectionId;
-  }
-
-  /**
-   * Assigns the story's section id.
-   *
-   * @param sectionId A string that contains the section id.
-   */
-  public void setSectionId(String sectionId) {
-    this.sectionId = sectionId;
-  }
-
-  /**
-   * Returns the story's section name.
+   * Returns a {@link String} with the story's section name.
    *
    * @return A string that contains the section name.
    */
@@ -90,16 +55,7 @@ public class Story {
   }
 
   /**
-   * Assigns the story's section name.
-   *
-   * @param sectionName A string that contains the section name.
-   */
-  public void setSectionName(String sectionName) {
-    this.sectionName = sectionName;
-  }
-
-  /**
-   * Assigns the story's web publication date.
+   * Returns a {@link String} with the story's publication date.
    *
    * @return A string that contains the web publication date.
    */
@@ -108,34 +64,7 @@ public class Story {
   }
 
   /**
-   * Assigns the story's web publication date.
-   *
-   * @param webPublicationDate A string that contains the web publication date.
-   */
-  public void setWebPublicationDate(String webPublicationDate) {
-    this.webPublicationDate = webPublicationDate;
-  }
-
-  /**
-   * Returns the story's web title.
-   *
-   * @return A string that contains the web title.
-   */
-  public String getWebTitle() {
-    return webTitle;
-  }
-
-  /**
-   * Assigns the story's web title.
-   *
-   * @param webTitle A string that contains the web title.
-   */
-  public void setWebTitle(String webTitle) {
-    this.webTitle = webTitle;
-  }
-
-  /**
-   * Returns the story's web url.
+   * Returns a {@link String} with the story's web url.
    *
    * @return A string that contains the web url.
    */
@@ -144,66 +73,30 @@ public class Story {
   }
 
   /**
-   * Assigns the story's web url.
+   * Returns a {@link String} with the story's headline.
    *
-   * @param webUrl A string that contains the web url.
+   * @return A {@link String} that contains the headline.
    */
-  public void setWebUrl(String webUrl) {
-    this.webUrl = webUrl;
+  public String getHeadline() {
+    return headline;
   }
 
   /**
-   * Returns the story's api url.
+   * Returns a {@link String} with the story's byline.
    *
-   * @return A string that contains the api url.
+   * @return A {@link String} that contains the byline.
    */
-  public String getApiUrl() {
-    return apiUrl;
+  public String getByline() {
+    return byline;
   }
 
   /**
-   * Assigns the story's api url.
+   * Returns a {@link String} with the story's trail text.
    *
-   * @param apiUrl A string that contains the api url.
+   * @return A {@link String} that contains the trail text.
    */
-  public void setApiUrl(String apiUrl) {
-    this.apiUrl = apiUrl;
-  }
-
-  /**
-   * Assigns the story's type (e.g. an article)
-   *
-   * @return A string that contains the story's type.
-   */
-  public String getType() {
-    return type;
-  }
-
-  /**
-   * Returns a the story's type (e.g. an article).
-   *
-   * @param type A string that contains the story's type.
-   */
-  public void setType(String type) {
-    this.type = type;
-  }
-
-  /**
-   * Returns the story's contributors.
-   *
-   * @return A string list that contains the story's contributors.
-   */
-  public List<String> getContributors() {
-    return contributors;
-  }
-
-  /**
-   * Assigns the story's contributors.
-   *
-   * @param contributor A string list that contains the story's contributors.
-   */
-  public void setContributors(List<String> contributor) {
-    this.contributors = contributor;
+  public String getTrailText() {
+    return trailText;
   }
 }
 

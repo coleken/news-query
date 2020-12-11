@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         R.id.navigation_browse, R.id.navigation_search).build();
     NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
         .findFragmentById(R.id.nav_host_fragment);
-    if (navHostFragment != null) { // Prevents NullPointerException
+    if (navHostFragment != null) {
       NavController navController = navHostFragment.getNavController();
       NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
       NavigationUI.setupWithNavController(navView, navController);
