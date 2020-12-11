@@ -15,7 +15,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import org.json.JSONArray;
@@ -33,15 +32,14 @@ public final class QueryUtils {
 
   private static final String JSON_RESPONSE = "response";
   private static final String JSON_RESULTS = "results";
-  private static final String TAGS = "tags";
+  private static final String JSON_FIELDS = "fields";
   private static final String ID = "id";
-  private static final String TYPE = "type";
   private static final String SECTION_NAME = "sectionName";
-  private static final String SECTION_ID = "sectionId";
   private static final String WEB_PUBLICATION_DATE = "webPublicationDate";
-  private static final String WEB_TITLE = "webTitle";
   private static final String WEB_URL = "webUrl";
-  private static final String API_URL = "apiUrl";
+  private static final String HEADLINE = "headline";
+  private static final String BYLINE = "byline";
+  private static final String TRAIL_TEXT = "trailText";
 
   /**
    * Private constructor
@@ -136,25 +134,17 @@ public final class QueryUtils {
           JSONObject storyAttribute = newsArray.getJSONObject(i);
           // Initialize story attributes
           String id = storyAttribute.getString(ID);
-          String type = storyAttribute.getString(TYPE);
           String sectionName = storyAttribute.getString(SECTION_NAME);
-          String sectionId = storyAttribute.getString(SECTION_ID);
           String webPublicationDate = storyAttribute.getString(WEB_PUBLICATION_DATE);
-          String webTitle = storyAttribute.getString(WEB_TITLE);
           String webUrl = storyAttribute.getString(WEB_URL);
-          String apiUrl = storyAttribute.getString(API_URL);
-          // Extract story tags
-          JSONArray tagsArray = storyAttribute.getJSONArray(TAGS);
-          List<String> contributors = new ArrayList<>();
-          for (int j = 0; j < tagsArray.length(); j++) {
-            // Tags object that contains the story contributors
-            JSONObject storyContributor = tagsArray.getJSONObject(j);
-            contributors.add(storyContributor.getString(WEB_TITLE));
-          }
+          // Extract relevant fields
+          JSONObject responseFields = newsArray.getJSONObject(i).getJSONObject(JSON_FIELDS);
+          String headline = responseFields.getString(HEADLINE);
+          String byline = responseFields.getString(BYLINE);
+          String trailText = responseFields.getString(TRAIL_TEXT);
           // Add all attributes to a new story object
           stories.add(
-              new Story(id, type, sectionId, sectionName, webPublicationDate, webTitle, webUrl,
-                  apiUrl, contributors));
+              new Story(id, sectionName, webPublicationDate, webUrl, headline, byline, trailText));
         }
       } catch (JSONException e) {
         Log.e(LOG_TAG, "Problem parsing JSON response", e);
@@ -193,10 +183,10 @@ public final class QueryUtils {
             break;
           default:
             builder.appendQueryParameter(parametersEntry.getKey(), parametersEntry.getValue());
-            builder.appendQueryParameter(apiKey, HttpConnectionClient.getApiKey());
             break;
         }
       }
+      builder.appendQueryParameter(apiKey, HttpConnectionClient.getApiKey());
     }
     return builder.build().toString();
   }
