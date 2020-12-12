@@ -1,15 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  android:id="@+id/list"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent">
-  <!--
-  TODO: Item Layout
-  -->
-  <TextView
+  android:id="@+id/layout_story_cardview"
+  style="@style/style_story_cardview"
+  app:cardCornerRadius="@dimen/cardview_corner_radius"
+  app:layout_constrainedHeight="true"
+  app:layout_constrainedWidth="true"
+  app:layout_constraintBottom_toBottomOf="parent"
+  app:layout_constraintEnd_toEndOf="parent"
+  app:layout_constraintStart_toStartOf="parent"
+  app:layout_constraintTop_toTopOf="parent">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/itemConstraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    android:layout_height="wrap_content">
+
+    <!-- Story Headline -->
+    <TextView
+      android:id="@+id/text_story_headline"
+      style="@style/style_story_title"
+      app:layout_constrainedHeight="true"
+      app:layout_constrainedWidth="true"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Trail Text -->
+    <TextView
+      android:id="@+id/text_story_trail_text"
+      style="@style/style_story_trail_text"
+      app:layout_constrainedHeight="true"
+      app:layout_constrainedWidth="true"
+      app:layout_constraintBottom_toTopOf="@+id/text_story_byline"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/text_story_headline" />
+
+    <!-- Story Resource-->
+    <TextView
+      android:id="@+id/text_story_resource"
+      style="@style/style_story_resource"
+      app:layout_constrainedHeight="true"
+      app:layout_constrainedWidth="true"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@+id/view_divider_section_type" />
+
+    <!-- Story Publication Date -->
+    <TextView
+      android:id="@+id/text_story_publication_date"
+      style="@style/style_story_publication_date"
+      app:layout_constrainedHeight="true"
+      app:layout_constrainedWidth="true"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Story Section Name-->
+    <TextView
+      android:id="@+id/text_story_section_name"
+      style="@style/style_story_section_name"
+      app:layout_constrainedHeight="true"
+      app:layout_constrainedWidth="true"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Story Byline -->
+    <TextView
+      android:id="@+id/text_story_byline"
+      style="@style/style_story_byline"
+      app:layout_constrainedHeight="true"
+      app:layout_constrainedWidth="true"
+      app:layout_constraintBottom_toTopOf="@+id/text_story_publication_date"
+      app:layout_constraintEnd_toStartOf="@+id/guideline_image_start"
+      app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Divider -->
+    <View
+      android:id="@+id/view_divider_section_type"
+      style="@style/style_story_divider"
+      app:layout_constrainedHeight="true"
+      app:layout_constrainedWidth="true"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@+id/text_story_section_name" />
+
+    <!-- Guideline Contributors -->
+    <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline_image_start"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintGuide_begin="200dp" />
+
+    <!-- Guideline End -->
+    <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline_end"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintGuide_begin="371dp" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
