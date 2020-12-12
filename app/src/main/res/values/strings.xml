@@ -141,16 +141,29 @@
   <!-- = = = = = Query Parameters = = = = = -->
   <!-- Query Parameter -->
   <string name="param_query">q</string>
-  <!-- API Key Parameter Key -->
+  <!-- Parameter Key: API -->
   <string name="param_key_api">api-key</string>
-  <!-- Show Tags Parameter Key -->
+  <!-- Parameter Key: Show Tags -->
   <string name="param_key_show_tags">show-tags</string>
-  <!-- Contributors Parameter Value -->
+  <!-- Parameter Value: Show Tags - contributors -->
   <string name="param_value_contributors">contributor</string>
-  <!-- Show Fields Parameter Key -->
+  <!-- Parameter Key: Show Fields -->
   <string name="param_key_show_fields">show-fields</string>
-  <!-- Body Text Parameter Value -->
+  <!-- Parameter Value: Show Fields - headline, byline, trail text, body text -->
   <string name="param_value_multiple_fields">headline,byline,trailText,body-text</string>
+  <!-- Parameter Key: Order By -->
+  <string name="param_key_order_by">order-by</string>
+  <!-- Parameter Value: Order By - newest -->
+  <string name="param_value_order_by_newest">newest</string>
+  <!-- Parameter Key: Use Date -->
+  <string name="param_key_use_date">use-date</string>
+  <!-- Parameter Value: Use Date - last modified -->
+  <string name="param_value_use_date_last_modified">last-modified</string>
+  <!-- Parameter Key: Page Size -->
+  <string name="param_key_page_size">page-size</string>
+  <!-- Parameter Value: Page Size - 30 -->
+  <string name="param_value_page_size_30">30</string>
+
   <!-- = = = = = = = = = = Story Item = = = = = = = = = = -->
   <!-- Story Resource -->
   <string name="story_resource">The Guardian</string>
