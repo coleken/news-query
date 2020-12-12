@@ -15,7 +15,11 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "API_KEY", API_KEY)
+        // This app requires a valid API key that should be
+        // placed in the gradle.properties file. The included
+        // key is a test key made available by the API vendor
+        // and has a limited number of queries.
+        buildConfigField "String", "API_KEY", API_KEY
     }
 
     buildTypes {
