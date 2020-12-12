@@ -42,5 +42,9 @@
   <!-- = = = = = = = = = = General Values = = = = = = = = = = -->
   <!-- Zero Height/Width Values -->
   <dimen name="zero_height_width">0dp</dimen>
+  <!-- Multipurpose/Default TextView Text Size -->
+  <dimen name="multipurpose_text_size">15sp</dimen>
+  <!-- Multipurpose/Default TextView Layout Margin -->
+  <dimen name="multipurpose_layout_margin">8dp</dimen>
 
 </resources>
