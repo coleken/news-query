@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!-- Spinner Array -->
+  <!-- Section Array -->
   <string-array name="section_array">
     <item>@string/default_spinner_text</item>
     <item>@string/section_art_and_design</item>
@@ -26,5 +26,32 @@
     <item>@string/section_travel</item>
     <item>@string/section_weather</item>
     <item>@string/section_world</item>
+  </string-array>
+  <!-- Spinner Array -->
+  <string-array name="spinner_array">
+    <item>@string/default_spinner_text</item>
+    <item>@string/spinner_art_and_design</item>
+    <item>@string/spinner_business</item>
+    <item>@string/spinner_cities</item>
+    <item>@string/spinner_culture</item>
+    <item>@string/spinner_education</item>
+    <item>@string/spinner_environment</item>
+    <item>@string/spinner_fashion</item>
+    <item>@string/spinner_film</item>
+    <item>@string/spinner_food</item>
+    <item>@string/spinner_inequality</item>
+    <item>@string/spinner_law</item>
+    <item>@string/spinner_life_and_style</item>
+    <item>@string/spinner_money</item>
+    <item>@string/spinner_music</item>
+    <item>@string/spinner_news</item>
+    <item>@string/spinner_politics</item>
+    <item>@string/spinner_science</item>
+    <item>@string/spinner_society</item>
+    <item>@string/spinner_sport</item>
+    <item>@string/spinner_tech</item>
+    <item>@string/spinner_travel</item>
+    <item>@string/spinner_weather</item>
+    <item>@string/spinner_world</item>
   </string-array>
 </resources>
