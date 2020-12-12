@@ -9,7 +9,6 @@
 /build
 /captures
 .cxx
-/gradle.properties
 /.idea/runConfigurations.xml
 /.idea/codeStyles/codeStyleConfig.xml
 /.idea/codeStyles/Project.xml

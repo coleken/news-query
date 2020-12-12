@@ -75,10 +75,7 @@
   <style name="style_story_byline" parent="style_parent_text_view">
     <item name="android:layout_width">match_parent</item>
     <item name="android:textSize">@dimen/story_content_text_size</item>
-    <item name="android:layout_marginTop">@dimen/list_item_margin</item>
-    <item name="android:layout_marginBottom">@dimen/list_item_margin</item>
-    <item name="android:layout_marginEnd">@dimen/list_item_margin</item>
-    <item name="android:layout_marginStart">@dimen/list_item_margin</item>
+    <item name="android:layout_margin">@dimen/list_item_margin</item>
     <item name="android:text">@string/string_story_byline</item>
     <item name="android:background">?selectableItemBackground</item>
     <item name="android:textColor">@color/colorSecondaryText</item>
@@ -101,6 +98,13 @@
     <item name="android:layout_marginStart">@dimen/list_item_margin</item>
     <item name="android:background">?selectableItemBackground</item>
     <item name="android:textColor">@color/colorSecondaryText</item>
+  </style>
+  <!-- Story Resource & Section Divider -->
+  <style name="style_story_divider" parent="Theme.NewsQ">
+    <item name="android:layout_width">1dp</item>
+    <item name="android:layout_height">15dp</item>
+    <item name="android:layout_margin">@dimen/list_item_margin</item>
+    <item name="android:background">@color/colorDivider</item>
   </style>
   <!-- List View -->
   <style name="style_listview_recyclerview" parent="Theme.NewsQ">

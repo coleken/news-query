@@ -1,20 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?><!-- TODO: create style -->
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/container"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:layout_marginTop="10dp"
+  style="@style/style_main_constraint_layout"
   tools:context=".MainActivity">
 
-  <!-- TODO: create style -->
-  <!-- Fragment Container View -->
+  <!-- Multipurpose TextView -->
+  <TextView
+    android:id="@+id/text_world_default"
+    style="@style/style_fragment_multipurpose_textview"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <!-- News Content / Fragment Host -->
   <androidx.fragment.app.FragmentContainerView
     android:id="@+id/nav_host_fragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:name="androidx.navigation.fragment.NavHostFragment"
+    style="@style/style_layout_host_fragment"
     app:defaultNavHost="true"
     app:layout_constrainedHeight="true"
     app:layout_constrainedWidth="true"
@@ -24,15 +28,10 @@
     app:layout_constraintTop_toTopOf="parent"
     app:navGraph="@navigation/mobile_navigation" />
 
-  <!-- TODO: create style -->
   <!-- Bottom Navigation View -->
   <com.google.android.material.bottomnavigation.BottomNavigationView
     android:id="@+id/nav_view"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="0dp"
-    android:layout_marginEnd="0dp"
-    android:background="?android:attr/windowBackground"
+    style="@style/style_layout_nav_view"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"

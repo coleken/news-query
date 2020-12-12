@@ -7,19 +7,19 @@
 
   <fragment
     android:id="@+id/navigation_world"
-    android:label="@string/title_world"
+    android:label="@string/title_app_world"
     android:name="com.example.newsq.ui.world.WorldFragment"
     tools:layout="@layout/fragment_world" />
 
   <fragment
     android:id="@+id/navigation_browse"
-    android:label="@string/title_browse"
+    android:label="@string/title_app_browse"
     android:name="com.example.newsq.ui.browse.BrowseFragment"
     tools:layout="@layout/fragment_browse" />
 
   <fragment
     android:id="@+id/navigation_search"
-    android:label="@string/title_search"
+    android:label="@string/title_app_search"
     android:name="com.example.newsq.ui.search.SearchFragment"
     tools:layout="@layout/fragment_search" />
 </navigation>
