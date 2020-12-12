@@ -5,6 +5,7 @@ import static com.example.newsq.R.layout.story_item;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.text.Html;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -50,13 +51,26 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
   @Override
   public void onBindViewHolder(@NonNull final StoryViewHolder holder, int position) {
     Story story = STORIES.get(position);
-    holder.headline.setText(story.getHeadline());
-    holder.trailText.setText(story.getTrailText());
-    holder.sectionName.setText(formatCapitalizaton(story.getSectionName()));
+    holder.headline.setText(formatText(story.getHeadline()));
+    holder.trailText.setText(formatText(story.getTrailText()));
+    holder.sectionName.setText(formatTitleCase(story.getSectionName()));
     holder.webPublicationDate.setText(formatDate(story.getWebPublicationDate()));
     holder.contributors.setText(story.getByline());
     holder.storyCard.setOnClickListener(view -> CONTEXT
         .startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(story.getWebUrl()))));
+  }
+
+  /**
+   * Returns styled text if HTML tags are present in the attribute.
+   *
+   * @param storyAttribute A {@link String} that contains a {@link Story} attribute.
+   * @return A {@link String} of the formatted attribute.
+   */
+  private String formatText(String storyAttribute) {
+    final String breakOpen = "<br>";
+    // Prevents interference with spacing in the user interface.
+    String cleanText = storyAttribute.replace(breakOpen, "");
+    return Html.fromHtml(cleanText).toString();
   }
 
   /**
@@ -65,7 +79,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
    * @param storyAttribute A {@link String} that contains a story attribute.
    * @return A {@link String} that contains a story attribute formatted to title case.
    */
-  private String formatCapitalizaton(String storyAttribute) {
+  private String formatTitleCase(String storyAttribute) {
     StringBuilder builder = new StringBuilder(storyAttribute.length());
     char[] attributeChars = storyAttribute.toLowerCase().toCharArray();
     boolean toTitleCase = true;
@@ -106,6 +120,16 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
   @Override
   public int getItemCount() {
     return STORIES.size();
+  }
+
+  /**
+   * Updates the {@link Story} {@link ArrayList}.
+   *
+   * @param stories An {@link ArrayList} of {@link Story} objects.
+   */
+  public void updateStories(ArrayList<Story> stories) {
+    STORIES.addAll(stories);
+    notifyDataSetChanged();
   }
 
   /**
