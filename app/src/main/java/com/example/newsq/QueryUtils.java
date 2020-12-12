@@ -27,9 +27,9 @@ import org.json.JSONObject;
  */
 public final class QueryUtils {
 
-  private static final String LOG_TAG = QueryUtils.class.getSimpleName();
   public static String httpResponseMessage;
 
+  private static final String LOG_TAG = QueryUtils.class.getSimpleName();
   private static final String JSON_RESPONSE = "response";
   private static final String JSON_RESULTS = "results";
   private static final String JSON_FIELDS = "fields";
@@ -136,18 +136,36 @@ public final class QueryUtils {
           String webUrl = storyAttribute.getString(WEB_URL);
           // Extract relevant fields
           JSONObject responseFields = newsArray.getJSONObject(i).getJSONObject(JSON_FIELDS);
-          String headline = responseFields.getString(HEADLINE);
-          String byline = responseFields.getString(BYLINE);
-          String trailText = responseFields.getString(TRAIL_TEXT);
+          String headline = checkGetJsonFields(responseFields, HEADLINE);
+          String byline = checkGetJsonFields(responseFields, BYLINE);
+          String trailText = checkGetJsonFields(responseFields, TRAIL_TEXT);
           // Add all attributes to a new story object
-          stories.add(
-              new Story(headline, byline, trailText, sectionName, webPublicationDate, webUrl));
+          stories
+              .add(new Story(headline, byline, trailText, sectionName, webPublicationDate, webUrl));
         }
       } catch (JSONException e) {
         Log.e(LOG_TAG, "Problem parsing JSON response", e);
       }
+
     }
     return stories;
+  }
+
+  /**
+   * Checks the fields in the API response for null values and returns a {@link String} that is
+   * empty if the value <b>does not</b> exist, or contains the value if it <b>does</b> exist.
+   *
+   * @param jsonObject A {@link JSONObject} retrieved from the API.
+   * @param key        A {@link String} with the name of the value to be checked.
+   * @return A {@link String} that is: empty if not successful, or has the value if successful.
+   * @throws JSONException if no mapping exists.
+   */
+  private static String checkGetJsonFields(JSONObject jsonObject, String key) throws JSONException {
+    String jsonValue = "";
+    if (!jsonObject.isNull(key)) {
+      jsonValue = jsonObject.getString(key);
+    }
+    return jsonValue;
   }
 
   /**
