@@ -132,7 +132,7 @@ public final class QueryUtils {
           // Extract story attributes
           JSONObject storyAttribute = newsArray.getJSONObject(i);
           String sectionName = storyAttribute.getString(SECTION_NAME);
-          String webPublicationDate = storyAttribute.getString(WEB_PUBLICATION_DATE);
+          String publicationDate = storyAttribute.getString(WEB_PUBLICATION_DATE);
           String webUrl = storyAttribute.getString(WEB_URL);
           // Extract relevant fields
           JSONObject responseFields = newsArray.getJSONObject(i).getJSONObject(JSON_FIELDS);
@@ -140,13 +140,11 @@ public final class QueryUtils {
           String byline = checkGetJsonFields(responseFields, BYLINE);
           String trailText = checkGetJsonFields(responseFields, TRAIL_TEXT);
           // Add all attributes to a new story object
-          stories
-              .add(new Story(headline, byline, trailText, sectionName, webPublicationDate, webUrl));
+          stories.add(new Story(headline, byline, trailText, sectionName, publicationDate, webUrl));
         }
       } catch (JSONException e) {
         Log.e(LOG_TAG, "Problem parsing JSON response", e);
       }
-
     }
     return stories;
   }
@@ -162,8 +160,10 @@ public final class QueryUtils {
    */
   private static String checkGetJsonFields(JSONObject jsonObject, String key) throws JSONException {
     String jsonValue = "";
-    if (!jsonObject.isNull(key)) {
-      jsonValue = jsonObject.getString(key);
+    if (jsonObject != null) {
+      if (!jsonObject.isNull(key)) {
+        jsonValue = jsonObject.getString(key);
+      }
     }
     return jsonValue;
   }
@@ -389,7 +389,8 @@ public final class QueryUtils {
     }
 
     /**
-     * Retrieves, decodes, and returns the API key.
+     * Retrieves the API key from the build config, decodes it from {@link Base64}, and returns it
+     * as a {@link String}.
      *
      * @return A {@link String} that contains the api key.
      */
