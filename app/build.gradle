@@ -16,12 +16,13 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         // This app requires a valid API key that should be
-        // placed in the gradle.properties file. The included
+        // placed in the key.properties file. The included
         // key is a test key made available by the API vendor
         // and has a limited number of queries.
-        buildConfigField "String", "API_KEY", API_KEY
+        checkForKeyProperties()
+        buildConfigField "boolean", "isKeyEncoded", isKeyEncoded()
+        buildConfigField "String", "API_KEY", getApiKey()
     }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -50,4 +51,27 @@ dependencies {
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+//Checks for the key properties file; creates it with default values if not present.
+static void checkForKeyProperties() {
+    File keyFile = new File("key.properties")
+    if (!keyFile.exists()) {
+        keyFile.createNewFile()
+        keyFile.text = "isKeyEncoded=false\nAPI_KEY=\"test\""
+    }
+}
+
+//Checks the boolean that indicates if the key is encoded with base 64.
+static def isKeyEncoded() {
+    Properties p = new Properties()
+    p.load(new FileInputStream(new File("key.properties")))
+    return p['isKeyEncoded']
+}
+//Retrieves the api key from the file.
+static def getApiKey() {
+    Properties p = new Properties()
+    p.load(new FileInputStream(new File("key.properties")))
+    return p['API_KEY']
 }
