@@ -396,12 +396,16 @@ public final class QueryUtils {
      */
     @NonNull
     private static String getApiKey() {
-      // Retrieve API key from build config
-      String encodedKey = com.example.newsq.BuildConfig.API_KEY;
-      // Decode the API key
-      byte[] bytes = Base64.decode(encodedKey, Base64.URL_SAFE);
-      // Return the converted key
-      return new String(bytes, StandardCharsets.UTF_8);
+      if (!BuildConfig.isKeyEncoded) {
+        return BuildConfig.API_KEY;
+      } else {
+        // Retrieve API key from build config
+        String encodedKey = BuildConfig.API_KEY;
+        // Decode the API key
+        byte[] bytes = Base64.decode(encodedKey, Base64.URL_SAFE);
+        // Return the converted key
+        return new String(bytes, StandardCharsets.UTF_8);
+      }
     }
   }
 }
