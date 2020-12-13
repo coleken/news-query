@@ -79,7 +79,7 @@ public class WorldFragment extends Fragment implements LoaderCallbacks<ArrayList
       final int WORLD_LOADER_ID = 1;
       LoaderManager.getInstance(this).initLoader(WORLD_LOADER_ID, null, this);
     } else {
-      progressBar.setVisibility(View.INVISIBLE);
+      progressBar.setVisibility(View.GONE);
       binding.textWorldDefault.setText(getString(no_network_connection));
     }
   }
@@ -125,6 +125,7 @@ public class WorldFragment extends Fragment implements LoaderCallbacks<ArrayList
    * @param storyData     An {@link ArrayList} of {@link Story} objects.
    */
   private void updateUserInterface(boolean validResponse, ArrayList<Story> storyData) {
+    binding.progressCircular.setVisibility(View.GONE);
     if (QueryUtils.isNullOrEmpty(storyData) && !validResponse) {     // Message for bad responses
       binding.textWorldDefault.setText(QueryUtils.httpResponseMessage);
     }
