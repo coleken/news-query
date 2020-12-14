@@ -101,8 +101,8 @@
   </style>
   <!-- Story Resource & Section Divider -->
   <style name="style_story_divider" parent="Theme.NewsQ">
-    <item name="android:layout_width">1dp</item>
-    <item name="android:layout_height">15dp</item>
+    <item name="android:layout_width">@dimen/story_divider_width</item>
+    <item name="android:layout_height">@dimen/story_divider_height</item>
     <item name="android:layout_margin">@dimen/list_item_margin</item>
     <item name="android:background">@color/colorDivider</item>
   </style>
@@ -112,7 +112,7 @@
     <item name="android:layout_width">match_parent</item>
   </style>
 
-  <!-- = = = = = = = = = = fragment_world = = = = = = = = = = -->
+  <!-- = = = = = = = = = = fragment_world/browse/search = = = = = = = = = = -->
   <!-- Progress Bar -->
   <style name="style_fragment_progress_bar">
     <item name="android:layout_height">wrap_content</item>
@@ -125,23 +125,24 @@
     <item name="android:layout_margin">@dimen/multipurpose_layout_margin</item>
     <item name="android:textAlignment">center</item>
   </style>
-  <!-- Status Layout -->
-  <style name="style_fragment_status_layout">
+
+  <!-- = = = = = = = = = = fragment_browse/search = = = = = = = = = = -->
+  <!-- Browse/Search Layout -->
+  <style name="style_browse_search_layout" parent="Theme.NewsQ">
     <item name="android:layout_width">match_parent</item>
-    <item name="android:layout_height">@dimen/status_layout_height</item>
-    <item name="android:paddingEnd">@dimen/status_layout_padding</item>
-    <item name="android:paddingStart">@dimen/status_layout_padding</item>
-    <item name="android:layout_marginBottom">@dimen/status_layout_margin_bottom</item>
+    <item name="android:layout_height">@dimen/browse_search_layout_height</item>
+    <item name="android:paddingEnd">@dimen/browse_search_layout_padding</item>
+    <item name="android:paddingStart">@dimen/browse_search_layout_padding</item>
+    <item name="android:layout_marginBottom">@dimen/browse_search_layout_margin_bottom</item>
     <item name="android:background">?android:attr/windowBackground</item>
-    <item name="android:elevation">@dimen/status_layout_elevation</item>
-  </style>
-  <!-- Status Label -->
-  <style name="style_fragment_status_label_textview" parent="style_parent_text_view">
-    <item name="android:layout_margin">@dimen/status_textview_margin</item>
-  </style>
-  <!-- Status -->
-  <style name="style_fragment_status_textview" parent="style_parent_text_view">
-    <item name="android:layout_margin">@dimen/status_textview_margin</item>
+    <item name="android:elevation">@dimen/browse_search_layout_elevation</item>
   </style>
 
+  <!-- Browse Spinner -->
+  <style name="style_browse_spinner" parent="Theme.NewsQ">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textAlignment">center</item>
+    <item name="android:textSize">@dimen/spinner_text_size</item>
+  </style>
 </resources>

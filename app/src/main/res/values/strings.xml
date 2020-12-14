@@ -193,4 +193,8 @@
   <string name="date_retrieved">Date Retrieved: </string>
   <!-- Error message label -->
   <string name="error_label">Error: </string>
+  <!-- Browse default message-->
+  <string name="browse_default_message">Select a category from the list.</string>
+  <!-- Search default message-->
+  <string name="search_default_message">Select a category from the list.</string>
 </resources>

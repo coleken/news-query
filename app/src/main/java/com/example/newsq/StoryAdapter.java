@@ -103,7 +103,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
    * @return A {@link String} that contains a formatted date.
    */
   private String formatDate(String publicationDateTime) {
-    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'", Locale.US);
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'", Locale.getDefault());
     format.setTimeZone(TimeZone.getTimeZone(String.valueOf(TimeZone.getDefault())));
     CharSequence timeAgo = "";
     try {

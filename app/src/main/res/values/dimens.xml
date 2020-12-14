@@ -7,17 +7,17 @@
   <!-- Constraint Layout Margin Top -->
   <dimen name="main_layout_margin_top">10dp</dimen>
 
-  <!-- = = = = = = = = = = Fragment Status Layout = = = = = = = = = = -->
+  <!-- = = = = = = = = = = Fragment Browse/Search Layout = = = = = = = = = = -->
   <!-- Layout Height -->
-  <dimen name="status_layout_height">30dp</dimen>
+  <dimen name="browse_search_layout_height">30dp</dimen>
   <!-- Layout Padding -->
-  <dimen name="status_layout_padding">12dp</dimen>
-  <!-- Layout Bottom Largin-->
-  <dimen name="status_layout_margin_bottom">5dp</dimen>
+  <dimen name="browse_search_layout_padding">12dp</dimen>
+  <!-- Layout Bottom Magin-->
+  <dimen name="browse_search_layout_margin_bottom">5dp</dimen>
   <!-- Layout Elevation-->
-  <dimen name="status_layout_elevation">2dp</dimen>
-  <!-- Status TextView Margin -->
-  <dimen name="status_textview_margin">5dp</dimen>
+  <dimen name="browse_search_layout_elevation">2dp</dimen>
+  <!-- Spinner Text Size -->
+  <dimen name="spinner_text_size">12sp</dimen>
 
   <!-- = = = = = = = = = = News Story Attributes = = = = = = = = = = -->
   <!-- = = = = = = Attribute Margin Sizes = = = = = = -->
@@ -30,6 +30,10 @@
   <dimen name="story_content_text_size">12sp</dimen>
   <!-- Story Title Text Size -->
   <dimen name="story_title_text_size">14sp</dimen>
+  <!-- Story Attribute Divider Width -->
+  <dimen name="story_divider_width">1dp</dimen>
+  <!-- Story Attribute Divider Height -->
+  <dimen name="story_divider_height">15dp</dimen>
 
   <!-- = = = = = = = = = = Card View = = = = = = = = = = -->
   <!-- Card View Layout Margin -->
