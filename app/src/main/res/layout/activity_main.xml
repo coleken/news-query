@@ -6,15 +6,6 @@
   style="@style/style_main_constraint_layout"
   tools:context=".MainActivity">
 
-  <!-- Multipurpose TextView -->
-  <TextView
-    android:id="@+id/text_world_default"
-    style="@style/style_fragment_multipurpose_textview"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
-
   <!-- News Content / Fragment Host -->
   <androidx.fragment.app.FragmentContainerView
     android:id="@+id/nav_host_fragment"
