@@ -335,8 +335,8 @@ public final class QueryUtils {
       responseOk = false;
       String response = "";
       final int STATUS_OK = 200;
-      final int connectionTimeoutLimit = 10000;
-      final int readTimeoutLimit = 15000;
+      final int connectionTimeoutLimit = 10000; // in milliseconds
+      final int readTimeoutLimit = 15000;       // in milliseconds
       final String requestGet = "GET";
       if (url != null) {
         try {
