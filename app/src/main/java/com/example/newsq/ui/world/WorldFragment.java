@@ -91,9 +91,12 @@ public class WorldFragment extends Fragment implements LoaderCallbacks<ArrayList
    */
   private String createUrlString() {
     Map<String, String> uriSegments = new HashMap<>();
+    // Base URL
     uriSegments.put(getString(R.string.uri_scheme_key), getString(R.string.uri_scheme_value));
     uriSegments.put(getString(R.string.uri_authority_key), getString(R.string.uri_authority_value));
+    // Section
     uriSegments.put(getString(R.string.uri_path_key), getString(R.string.section_world));
+    // Parameters
     uriSegments.put(getString(R.string.param_key_show_fields),
         getString(R.string.param_value_multiple_fields));
     uriSegments
