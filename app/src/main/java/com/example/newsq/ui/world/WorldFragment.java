@@ -1,25 +1,11 @@
 package com.example.newsq.ui.world;
 
-import static com.example.newsq.R.string.no_network_connection;
-import static com.example.newsq.R.string.param_key_order_by;
-import static com.example.newsq.R.string.param_key_page_size;
-import static com.example.newsq.R.string.param_key_show_fields;
-import static com.example.newsq.R.string.param_value_multiple_fields;
-import static com.example.newsq.R.string.param_value_order_by_newest;
-import static com.example.newsq.R.string.param_value_page_size_30;
-import static com.example.newsq.R.string.problem_with_request;
-import static com.example.newsq.R.string.section_world;
-import static com.example.newsq.R.string.uri_authority_key;
-import static com.example.newsq.R.string.uri_authority_value;
-import static com.example.newsq.R.string.uri_path_key;
-import static com.example.newsq.R.string.uri_scheme_key;
-import static com.example.newsq.R.string.uri_scheme_value;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -29,6 +15,7 @@ import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.newsq.QueryUtils;
+import com.example.newsq.R;
 import com.example.newsq.Story;
 import com.example.newsq.StoryAdapter;
 import com.example.newsq.StoryLoader;
@@ -47,6 +34,7 @@ public class WorldFragment extends Fragment implements LoaderCallbacks<ArrayList
   private RecyclerView recyclerView;
   private StoryAdapter storyAdapter;
   private ProgressBar progressBar;
+  private TextView defaultView;
 
   /**
    * Default constructor
@@ -64,9 +52,9 @@ public class WorldFragment extends Fragment implements LoaderCallbacks<ArrayList
   public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     binding = FragmentWorldBinding.inflate(inflater, container, false);
-    recyclerView = binding.listNewsStories;
-    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    defaultView = binding.textWorldDefault;
     progressBar = binding.progressCircular;
+    recyclerView = binding.listNewsStories;
     checkConfigureLoader();
     return binding.getRoot();
   }
@@ -79,8 +67,8 @@ public class WorldFragment extends Fragment implements LoaderCallbacks<ArrayList
       final int WORLD_LOADER_ID = 1;
       LoaderManager.getInstance(this).initLoader(WORLD_LOADER_ID, null, this);
     } else {
-      progressBar.setVisibility(View.GONE);
-      binding.textWorldDefault.setText(getString(no_network_connection));
+      progressBar.setVisibility(View.INVISIBLE);
+      defaultView.setText(getString(R.string.no_network_connection));
     }
   }
 
@@ -103,12 +91,17 @@ public class WorldFragment extends Fragment implements LoaderCallbacks<ArrayList
    */
   private String createUrlString() {
     Map<String, String> uriSegments = new HashMap<>();
-    uriSegments.put(getString(uri_scheme_key), getString(uri_scheme_value));
-    uriSegments.put(getString(uri_authority_key), getString(uri_authority_value));
-    uriSegments.put(getString(uri_path_key), getString(section_world));
-    uriSegments.put(getString(param_key_show_fields), getString(param_value_multiple_fields));
-    uriSegments.put(getString(param_key_page_size), getString(param_value_page_size_30));
-    uriSegments.put(getString(param_key_order_by), getString(param_value_order_by_newest));
+    uriSegments.put(getString(R.string.uri_scheme_key), getString(R.string.uri_scheme_value));
+    uriSegments.put(getString(R.string.uri_authority_key), getString(R.string.uri_authority_value));
+    uriSegments.put(getString(R.string.uri_path_key), getString(R.string.section_world));
+    uriSegments.put(getString(R.string.param_key_show_fields),
+        getString(R.string.param_value_multiple_fields));
+    uriSegments
+        .put(getString(R.string.param_key_page_size), getString(R.string.param_value_page_size_30));
+    uriSegments.put(getString(R.string.param_key_use_date),
+        getString(R.string.param_value_use_date_last_modified));
+    uriSegments.put(getString(R.string.param_key_order_by),
+        getString(R.string.param_value_order_by_newest));
     return QueryUtils.createUri(uriSegments);
   }
 
@@ -125,16 +118,18 @@ public class WorldFragment extends Fragment implements LoaderCallbacks<ArrayList
    * @param storyData     An {@link ArrayList} of {@link Story} objects.
    */
   private void updateUserInterface(boolean validResponse, ArrayList<Story> storyData) {
-    binding.progressCircular.setVisibility(View.GONE);
+    progressBar.setVisibility(View.INVISIBLE);
     if (QueryUtils.isNullOrEmpty(storyData) && !validResponse) {     // Message for bad responses
-      binding.textWorldDefault.setText(QueryUtils.httpResponseMessage);
+      defaultView.setText(QueryUtils.httpResponseMessage);
     }
     if (validResponse) {                                             // Update UI for good responses
-      binding.textWorldDefault.setVisibility(View.INVISIBLE);
+      defaultView.setVisibility(View.INVISIBLE);
+      recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
       storyAdapter = new StoryAdapter(getContext(), storyData);
       recyclerView.setAdapter(storyAdapter);
     } else {                                                         // For null/empty cases
-      binding.textWorldDefault.setText(problem_with_request);
+      defaultView.setVisibility(View.VISIBLE);
+      defaultView.setText(getString(R.string.problem_with_request));
     }
   }
 
