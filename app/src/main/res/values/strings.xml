@@ -196,5 +196,7 @@
   <!-- Browse default message-->
   <string name="browse_default_message">Select a category from the list.</string>
   <!-- Search default message-->
-  <string name="search_default_message">Select a category from the list.</string>
+  <string name="search_default_message">Enter a term to search.</string>
+  <!-- Search Query Hint-->
+  <string name="search_query_hint">Search News</string>
 </resources>
