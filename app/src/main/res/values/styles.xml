@@ -137,12 +137,20 @@
     <item name="android:background">?android:attr/windowBackground</item>
     <item name="android:elevation">@dimen/browse_search_layout_elevation</item>
   </style>
-
   <!-- Browse Spinner -->
   <style name="style_browse_spinner" parent="Theme.NewsQ">
     <item name="android:layout_width">match_parent</item>
     <item name="android:layout_height">wrap_content</item>
     <item name="android:textAlignment">center</item>
-    <item name="android:textSize">@dimen/spinner_text_size</item>
+    <item name="android:textSize">@dimen/search_spinner_text_size</item>
+  </style>
+  <!-- Search Bar -->
+  <style name="style_search_bar">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">30dp</item>
+    <item name="android:inputType">text</item>
+    <item name="android:textColor">@color/colorPrimaryText</item>
+    <item name="android:queryHint">@string/search_query_hint</item>
+    <item name="android:textSize">@dimen/search_spinner_text_size</item>
   </style>
 </resources>

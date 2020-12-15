@@ -9,7 +9,7 @@
 
   <!-- = = = = = = = = = = Fragment Browse/Search Layout = = = = = = = = = = -->
   <!-- Layout Height -->
-  <dimen name="browse_search_layout_height">30dp</dimen>
+  <dimen name="browse_search_layout_height">35dp</dimen>
   <!-- Layout Padding -->
   <dimen name="browse_search_layout_padding">12dp</dimen>
   <!-- Layout Bottom Magin-->
@@ -17,7 +17,7 @@
   <!-- Layout Elevation-->
   <dimen name="browse_search_layout_elevation">2dp</dimen>
   <!-- Spinner Text Size -->
-  <dimen name="spinner_text_size">12sp</dimen>
+  <dimen name="search_spinner_text_size">12sp</dimen>
 
   <!-- = = = = = = = = = = News Story Attributes = = = = = = = = = = -->
   <!-- = = = = = = Attribute Margin Sizes = = = = = = -->
