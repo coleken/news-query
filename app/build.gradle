@@ -65,13 +65,14 @@ static void checkForKeyProperties() {
 
 //Checks the boolean that indicates if the key is encoded with base 64.
 static def isKeyEncoded() {
-    Properties p = new Properties()
-    p.load(new FileInputStream(new File("key.properties")))
-    return p['isKeyEncoded']
+    Properties properties = new Properties()
+    properties.load(new FileInputStream(new File("key.properties")))
+    return properties['isKeyEncoded']
 }
+
 //Retrieves the api key from the file.
 static def getApiKey() {
-    Properties p = new Properties()
-    p.load(new FileInputStream(new File("key.properties")))
-    return p['API_KEY']
+    Properties properties = new Properties()
+    properties.load(new FileInputStream(new File("key.properties")))
+    return properties['API_KEY']
 }
