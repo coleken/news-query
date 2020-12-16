@@ -86,8 +86,9 @@ public class SearchFragment extends Fragment implements LoaderCallbacks<ArrayLis
    */
   private void configureSearchField() {
     SearchView searchView = binding.storySearchBar;
-    searchView.setIconifiedByDefault(false);
+    searchView.setIconified(false);
     searchView.onActionViewExpanded();
+
     searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
       @Override
