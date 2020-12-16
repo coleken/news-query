@@ -1,12 +1,9 @@
 package com.example.newsq.ui.search;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -51,7 +48,6 @@ public class SearchFragment extends Fragment implements LoaderCallbacks<ArrayLis
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
-    showHideKeyboard(requireContext(), container, true); // Show keyboard
     binding = FragmentSearchBinding.inflate(inflater, container, false);
     recyclerView = binding.listNewsStories;
     progressBar = binding.progressCircular;
@@ -60,25 +56,6 @@ public class SearchFragment extends Fragment implements LoaderCallbacks<ArrayLis
     defaultView.setText(R.string.search_default_message);
     configureSearchField();
     return binding.getRoot();
-  }
-
-  /**
-   * Uses the {@link InputMethodManager} to hide the keyboard when it isn't required, or hide it
-   * completely.
-   *
-   * @param context  The {@link Context} from the current {@link Activity}.
-   * @param view     A {@link View} instance.
-   * @param isNeeded A {@link Boolean} of true if the keyboard should be visible, and false if it
-   *                 should be visible only when required.
-   */
-  public void showHideKeyboard(@NonNull Context context, @NonNull View view, boolean isNeeded) {
-    InputMethodManager manager = (InputMethodManager) context
-        .getSystemService(Activity.INPUT_METHOD_SERVICE);
-    if (!isNeeded) {
-      manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    } else {
-      manager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
-    }
   }
 
   /**
@@ -103,9 +80,6 @@ public class SearchFragment extends Fragment implements LoaderCallbacks<ArrayLis
 
       @Override
       public boolean onQueryTextChange(String newText) {
-        if (newText.isEmpty()) {
-          searchView.clearFocus();
-        }
         return false;
       }
     });

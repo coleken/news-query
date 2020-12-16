@@ -4,7 +4,6 @@ import static android.R.layout.simple_spinner_dropdown_item;
 import static android.R.layout.simple_spinner_item;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,7 +57,7 @@ public class BrowseFragment extends Fragment implements AdapterView.OnItemSelect
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
-    showHideKeyboard(requireContext(), container, false); // Hide keyboard
+    hideKeyboard();
     binding = FragmentBrowseBinding.inflate(inflater, container, false);
     progressBar = binding.progressCircular;
     defaultView = binding.textBrowseDefault;
@@ -70,22 +69,13 @@ public class BrowseFragment extends Fragment implements AdapterView.OnItemSelect
   }
 
   /**
-   * Uses the {@link InputMethodManager} to hide the keyboard when it isn't required, or hide it
-   * completely.
-   *
-   * @param context  The {@link Context} from the current {@link Activity}.
-   * @param view     A {@link View} instance.
-   * @param isNeeded A {@link Boolean} of true if the keyboard should be visible, and false if it
-   *                 should be invisible.
+   * Uses {@link InputMethodManager} to toggle the software keyboard's appearance.
    */
-  public void showHideKeyboard(@NonNull Context context, @NonNull View view, boolean isNeeded) {
-    InputMethodManager manager = (InputMethodManager) context
+  private void hideKeyboard() {
+    InputMethodManager manager = (InputMethodManager) requireContext()
         .getSystemService(Activity.INPUT_METHOD_SERVICE);
-    if (!isNeeded) {
-      manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    } else {
-      manager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_IMPLICIT_ONLY);
-    }
+    manager.hideSoftInputFromWindow(requireActivity().getCurrentFocus().getWindowToken(),
+        InputMethodManager.RESULT_UNCHANGED_SHOWN);
   }
 
   /**
