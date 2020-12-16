@@ -63,7 +63,9 @@ public class WorldFragment extends Fragment implements LoaderCallbacks<ArrayList
   }
 
   /**
-   * Uses {@link InputMethodManager} to toggle the software keyboard's appearance.
+   * Uses {@link InputMethodManager} to hide the software keyboard; this method prevents the
+   * keyboard from remaining on the screen if it was visible when switching from the {@link
+   * com.example.newsq.ui.search.SearchFragment SearchFragment}.
    */
   private void hideKeyboard() {
     InputMethodManager manager = (InputMethodManager) requireContext()
