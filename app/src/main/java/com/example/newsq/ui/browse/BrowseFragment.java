@@ -57,7 +57,7 @@ public class BrowseFragment extends Fragment implements AdapterView.OnItemSelect
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
-    hideKeyboard();
+    hideKeyboard(container);
     binding = FragmentBrowseBinding.inflate(inflater, container, false);
     progressBar = binding.progressCircular;
     defaultView = binding.textBrowseDefault;
@@ -72,11 +72,13 @@ public class BrowseFragment extends Fragment implements AdapterView.OnItemSelect
    * Uses {@link InputMethodManager} to hide the software keyboard; this method prevents the
    * keyboard from remaining on the screen if it was visible when switching from the {@link
    * com.example.newsq.ui.search.SearchFragment SearchFragment}.
+   *
+   * @param view An instance of {@link View}.
    */
-  private void hideKeyboard() {
+  private void hideKeyboard(View view) {
     InputMethodManager manager = (InputMethodManager) requireContext()
         .getSystemService(Activity.INPUT_METHOD_SERVICE);
-    manager.hideSoftInputFromWindow(requireActivity().getCurrentFocus().getWindowToken(),
+    manager.hideSoftInputFromWindow(view.getWindowToken(),
         InputMethodManager.RESULT_UNCHANGED_SHOWN);
   }
 
