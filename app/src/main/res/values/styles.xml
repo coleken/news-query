@@ -137,17 +137,31 @@
     <item name="android:background">?android:attr/windowBackground</item>
     <item name="android:elevation">@dimen/browse_search_layout_elevation</item>
   </style>
-  <!-- Browse Spinner -->
-  <style name="style_browse_spinner" parent="Theme.NewsQ">
-    <item name="android:layout_width">match_parent</item>
+  <!-- BrowseFragment "Now Reading" TextView -->
+  <style name="style_now_reading_section" parent="Theme.NewsQ">
+    <item name="android:layout_width">wrap_content</item>
     <item name="android:layout_height">wrap_content</item>
+    <item name="android:visibility">invisible</item>
     <item name="android:textAlignment">center</item>
+    <item name="android:layout_marginStart">@dimen/list_item_margin</item>
+    <item name="android:layout_marginEnd">@dimen/list_item_margin</item>
+    <item name="android:text">@string/string_now_reading_section</item>
     <item name="android:textSize">@dimen/search_spinner_text_size</item>
   </style>
-  <!-- Search Bar -->
+  <!-- BrowseFragment Section Spinner -->
+  <style name="style_browse_spinner" parent="@android:style/Widget.Holo.Light.Spinner">
+    <item name="android:layout_width">@dimen/browse_spinner_width</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textAlignment">center</item>
+    <item name="android:popupBackground">@color/white</item>
+    <item name="android:spinnerMode">dropdown</item>
+    <item name="android:textSize">@dimen/search_spinner_text_size</item>
+  </style>
+  <!-- SearchFragment SearchView -->
   <style name="style_search_bar">
     <item name="android:layout_width">match_parent</item>
-    <item name="android:layout_height">30dp</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_marginBottom">@dimen/list_item_margin</item>
     <item name="android:inputType">text</item>
     <item name="android:textColor">@color/colorPrimaryText</item>
     <item name="android:queryHint">@string/search_query_hint</item>

@@ -34,12 +34,24 @@
 
     <!-- Spinner -->
     <Spinner
-      android:id="@+id/story_sections_spinner"
+      android:id="@+id/spinner_story_sections"
       style="@style/style_browse_spinner"
+      app:layout_constrainedHeight="true"
+      app:layout_constrainedWidth="true"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Now Viewing -->
+    <TextView
+      android:id="@+id/text_now_reading_section"
+      style="@style/style_now_reading_section"
+      app:layout_constrainedHeight="true"
+      app:layout_constrainedWidth="true"
+      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
+
   </androidx.constraintlayout.widget.ConstraintLayout>
 
   <!-- News Recycler View -->

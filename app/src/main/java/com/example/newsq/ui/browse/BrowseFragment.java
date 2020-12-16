@@ -92,7 +92,7 @@ public class BrowseFragment extends Fragment implements AdapterView.OnItemSelect
    * Creates a {@link Spinner} configured to display news categories.
    */
   private void createBrowseSpinner() {
-    Spinner spinner = binding.storySectionsSpinner;
+    Spinner spinner = binding.spinnerStorySections;
     spinner.setAdapter(createSelectionAdapter());
     spinner.setOnItemSelectedListener(this);
   }
@@ -120,10 +120,13 @@ public class BrowseFragment extends Fragment implements AdapterView.OnItemSelect
   @Override
   public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
     if (position > 0) { // Skips the default/non-functional spinner array item
+      binding.textNowReadingSection.setVisibility(View.VISIBLE);
       defaultView.setVisibility(View.INVISIBLE);
       recyclerView.setVisibility(View.INVISIBLE);
       progressBar.setVisibility(View.VISIBLE);
       checkConfigureLoader();
+    } else {
+      binding.textNowReadingSection.setVisibility(View.INVISIBLE);
     }
   }
 
@@ -167,7 +170,7 @@ public class BrowseFragment extends Fragment implements AdapterView.OnItemSelect
    */
   private String createUrlString() {
     Map<String, String> uriSegments = new HashMap<>();
-    String section = getSpinnerMap().get(binding.storySectionsSpinner.getSelectedItem().toString());
+    String section = getSpinnerMap().get(binding.spinnerStorySections.getSelectedItem().toString());
     // Base URL
     uriSegments.put(getString(R.string.uri_scheme_key), getString(R.string.uri_scheme_value));
     uriSegments.put(getString(R.string.uri_authority_key), getString(R.string.uri_authority_value));

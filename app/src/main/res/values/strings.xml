@@ -65,9 +65,11 @@
   <!-- Section World -->
   <string name="spinner_world">World</string>
 
-  <!-- = = = = = = = = = = Search Fragment Text = = = = = = = = = = -->
+  <!-- = = = = = = = = = = Browse/Search Fragment Text = = = = = = = = = = -->
   <!-- Search EditText Field Hint -->
   <string name="search_for_news">Search for News</string>
+  <!-- Browse Spinner Now Reading TextView -->
+  <string name="string_now_reading_section">Now Reading:</string>
 
   <!-- = = = = = = = = = = API Query Text = = = = = = = = = = -->
   <!-- = = = = = Base URL = = = = = -->
