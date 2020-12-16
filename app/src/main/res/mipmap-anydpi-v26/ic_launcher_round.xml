@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
-  <background android:drawable="@drawable/ic_launcher_background" />
-  <foreground android:drawable="@drawable/ic_launcher_foreground" />
-</adaptive-icon>
+  <background android:drawable="@mipmap/ic_launcher_background" />
+  <foreground android:drawable="@mipmap/ic_launcher_foreground" />
+</adaptive-icon><!--
+  Launcher Newspaper Image
+  Original Name: newspaper-154444_640.png
+  Artist/Owner: by OpenClipart-Vectors
+  Retrieved From: https://pixabay.com/vectors/newspaper-article-journal-headlines-154444/
+  Retrieved On: 12/8/2020
+  License: Pixabay License, https://pixabay.com/service/license/
+
+  Launcher Magnifying Glass Image
+  Original Name: magnifier-1093183_640.png
+  Artist/Owner: by Samuel1983
+  Retrieved From: https://pixabay.com/vectors/magnifier-glass-icon-nero-vector-1093183/
+  Retrieved On: 12/8/2020
+  License: Pixabay License, https://pixabay.com/service/license/
+
+  Launcher Globe Image
+  Original Name: globe-147715_640.png
+  Artist/Owner: by OpenClipart-Vectors
+  Retrieved From: https://pixabay.com/vectors/globe-earth-planet-continents-147715/
+  Retrieved On: 12/8/2020
+  License: Pixabay License, https://pixabay.com/service/license/
+  -->
