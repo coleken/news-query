@@ -69,7 +69,7 @@
     <item name="android:layout_marginEnd">@dimen/list_item_margin</item>
     <item name="android:layout_marginStart">@dimen/list_item_margin</item>
     <item name="android:background">?selectableItemBackground</item>
-    <item name="android:textColor">@color/colorSecondaryText</item>
+    <item name="android:textColor">@color/colorPrimaryText</item>
   </style>
   <!-- Story Byline -->
   <style name="style_story_byline" parent="style_parent_text_view">
@@ -86,7 +86,7 @@
     <item name="android:text">@string/story_section_name</item>
     <item name="android:layout_margin">@dimen/list_item_margin</item>
     <item name="android:background">?selectableItemBackground</item>
-    <item name="android:textColor">@color/colorSecondaryText</item>
+    <item name="android:textColor">@color/colorPrimaryText</item>
   </style>
   <!-- Story Publication Date -->
   <style name="style_story_publication_date" parent="style_parent_text_view">

@@ -1,0 +1,87 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        applicationId "com.example.newsq"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // This app requires a valid API key that should be
+        // placed in the key.properties file. The included
+        // key is a test key made available by the API vendor
+        // and has a limited number of queries.
+        ApiKey.checkBuildKeyProperties()
+        buildConfigField "boolean", "isKeyEncoded", ApiKey.isKeyEncoded()
+        buildConfigField "String", "API_KEY", ApiKey.getApiKey()
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.navigation:navigation-fragment:2.3.2'
+    implementation 'androidx.navigation:navigation-ui:2.3.2'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:4.13.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+class ApiKey {
+
+    static String[] keyProperties = new String[2]
+
+// Checks for the key properties file; creates it with default values if not present.
+    static void checkBuildKeyProperties() {
+        File keyFile = new File("key.properties")
+        if (!keyFile.exists()) {
+            keyFile.createNewFile()
+            keyFile.text = "isKeyEncoded=false\nAPI_KEY=\"test\""
+        }
+        getKeyProperties(keyFile)
+    }
+// Reads the key properties file and adds values to array
+    static def getKeyProperties(File keyFile) {
+        Properties properties = new Properties()
+        properties.load(new FileInputStream(keyFile))
+        keyProperties[0] = properties['isKeyEncoded']
+        keyProperties[1] = properties['API_KEY']
+    }
+
+// Retrieves the boolean that indicates if the key is encoded with base 64.
+    static def isKeyEncoded() {
+        return keyProperties[0]
+    }
+
+//Retrieves the api key from the properties array.
+    static def getApiKey() {
+        return keyProperties[1]
+    }
+}
