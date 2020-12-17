@@ -80,7 +80,7 @@ public final class QueryUtils {
    * Called by: {@link #fetchNews(String)}
    */
   private static void delayNewsFetch() {
-    final int time = 2000; // in milliseconds
+    final int time = 1500; // in milliseconds
     try {
       Thread.sleep(time);
     } catch (InterruptedException e) {

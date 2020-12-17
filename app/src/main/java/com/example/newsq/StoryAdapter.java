@@ -67,9 +67,9 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
    * @return A {@link String} of the formatted attribute.
    */
   private String formatText(String storyAttribute) {
-    final String breakOpen = "<br>";
+    final String breakTag = "<br>";
     // Prevents interference with spacing in the user interface.
-    String cleanText = storyAttribute.replace(breakOpen, "");
+    String cleanText = storyAttribute.replace(breakTag, "");
     return Html.fromHtml(cleanText).toString();
   }
 

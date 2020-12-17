@@ -39,6 +39,8 @@ import java.util.Map;
 public class BrowseFragment extends Fragment implements AdapterView.OnItemSelectedListener,
     LoaderCallbacks<ArrayList<Story>> {
 
+  private String url;
+  private boolean hasLoaderInit = false;
   private FragmentBrowseBinding binding;
   private RecyclerView recyclerView;
   private StoryAdapter storyAdapter;
@@ -63,7 +65,6 @@ public class BrowseFragment extends Fragment implements AdapterView.OnItemSelect
     defaultView = binding.textBrowseDefault;
     recyclerView = binding.listNewsStories;
     createBrowseSpinner();
-    progressBar.setVisibility(View.INVISIBLE);
     defaultView.setText(R.string.browse_default_message);
     return binding.getRoot();
   }
@@ -106,18 +107,10 @@ public class BrowseFragment extends Fragment implements AdapterView.OnItemSelect
   }
 
   @Override
-  public void onDestroy() {
-    super.onDestroy();
-    binding = null;
-  }
-
-  @Override
   public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
     if (position > 0) { // Skips the default/non-functional spinner array item
-      binding.textNowReadingSection.setVisibility(View.VISIBLE);
-      defaultView.setVisibility(View.INVISIBLE);
-      recyclerView.setVisibility(View.INVISIBLE);
-      progressBar.setVisibility(View.VISIBLE);
+      String selection = parent.getSelectedItem().toString();
+      createUrlString(selection);
       checkConfigureLoader();
     } else {
       binding.textNowReadingSection.setVisibility(View.INVISIBLE);
@@ -125,46 +118,13 @@ public class BrowseFragment extends Fragment implements AdapterView.OnItemSelect
   }
 
   /**
-   * Checks for an Internet connection before initializing or restarting the loader and contacting
-   * the API.
-   */
-  private void checkConfigureLoader() {
-    final int BROWSE_LOADER_ID = 2;
-    if (QueryUtils.isDeviceConnected(getContext())) {
-      /*
-      Checks storyAdapter to determine if restartLoader or initLoader is called; storyAdapter is
-      only null before the first news query is made.
-       */
-      if (storyAdapter != null) {
-        LoaderManager.getInstance(this).restartLoader(BROWSE_LOADER_ID, null, this);
-      } else {
-        LoaderManager.getInstance(this).initLoader(BROWSE_LOADER_ID, null, this);
-      }
-    } else {
-      progressBar.setVisibility(View.INVISIBLE);
-      defaultView.setText(getString(R.string.no_network_connection));
-    }
-  }
-
-  @Override
-  public void onNothingSelected(AdapterView<?> parent) {
-    // DO NOTHING ON SELECTED
-  }
-
-  @NonNull
-  @Override
-  public Loader<ArrayList<Story>> onCreateLoader(int id, @Nullable Bundle args) {
-    return new StoryLoader(requireContext(), createUrlString());
-  }
-
-  /**
    * Creates a {@link String} formatted for an API request.
    *
-   * @return A {@link String} that contains a url for API requests.
+   * @param spinnerSelection A {@link String} that contains the user's selection from the spinner.
    */
-  private String createUrlString() {
+  private void createUrlString(String spinnerSelection) {
     Map<String, String> uriSegments = new HashMap<>();
-    String section = getSpinnerMap().get(binding.spinnerStorySections.getSelectedItem().toString());
+    String section = getSpinnerMap().get(spinnerSelection);
     // Base URL
     uriSegments.put(getString(R.string.uri_scheme_key), getString(R.string.uri_scheme_value));
     uriSegments.put(getString(R.string.uri_authority_key), getString(R.string.uri_authority_value));
@@ -179,7 +139,7 @@ public class BrowseFragment extends Fragment implements AdapterView.OnItemSelect
         getString(R.string.param_value_use_date_last_modified));
     uriSegments.put(getString(R.string.param_key_order_by),
         getString(R.string.param_value_order_by_newest));
-    return QueryUtils.createUri(uriSegments);
+    url = QueryUtils.createUri(uriSegments);
   }
 
   /**
@@ -197,6 +157,37 @@ public class BrowseFragment extends Fragment implements AdapterView.OnItemSelect
     return spinnerMap;
   }
 
+  /**
+   * Checks for an Internet connection before initializing or restarting the loader and contacting
+   * the API.
+   */
+  private void checkConfigureLoader() {
+    final int BROWSE_LOADER_ID = 2;
+    if (QueryUtils.isDeviceConnected(getContext())) {
+      defaultView.setVisibility(View.INVISIBLE);
+      recyclerView.setVisibility(View.INVISIBLE);
+      progressBar.setVisibility(View.VISIBLE);
+      /*
+      Checks hasLoaderInit to determine if restartLoader or initLoader is called; hasLoaderInit is
+      only false before the first news query is made.
+       */
+      if (!hasLoaderInit) {
+        LoaderManager.getInstance(this).initLoader(BROWSE_LOADER_ID, null, this);
+        hasLoaderInit = true;
+      } else {
+        LoaderManager.getInstance(this).restartLoader(BROWSE_LOADER_ID, null, this);
+      }
+    } else {
+      defaultView.setText(getString(R.string.no_network_connection));
+    }
+  }
+
+  @NonNull
+  @Override
+  public Loader<ArrayList<Story>> onCreateLoader(int id, @Nullable Bundle args) {
+    return new StoryLoader(requireContext(), url);
+  }
+
   @Override
   public void onLoadFinished(@NonNull Loader<ArrayList<Story>> loader, ArrayList<Story> storyData) {
     updateUserInterface(QueryUtils.isResponseValid(), storyData);
@@ -212,14 +203,15 @@ public class BrowseFragment extends Fragment implements AdapterView.OnItemSelect
   private void updateUserInterface(boolean validResponse, ArrayList<Story> storyData) {
     progressBar.setVisibility(View.INVISIBLE);
     if (QueryUtils.isNullOrEmpty(storyData) && !validResponse) {     // Message for bad responses
+      defaultView.setVisibility(View.VISIBLE);
       defaultView.setText(QueryUtils.httpResponseMessage);
     }
     if (validResponse) {                                             // Update UI for good responses
-      defaultView.setVisibility(View.INVISIBLE);
       recyclerView.setVisibility(View.VISIBLE);
       recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
       storyAdapter = new StoryAdapter(getContext(), storyData);
       recyclerView.setAdapter(storyAdapter);
+      binding.textNowReadingSection.setVisibility(View.VISIBLE);
     } else {                                                         // For null/empty cases
       defaultView.setVisibility(View.VISIBLE);
       defaultView.setText(getString(R.string.problem_with_request));
@@ -227,7 +219,18 @@ public class BrowseFragment extends Fragment implements AdapterView.OnItemSelect
   }
 
   @Override
+  public void onNothingSelected(AdapterView<?> parent) {
+    // DO NOTHING ON SELECTED
+  }
+
+  @Override
   public void onLoaderReset(@NonNull Loader<ArrayList<Story>> storyLoader) {
     storyAdapter.updateStories(new ArrayList<>());
+  }
+
+  @Override
+  public void onDestroy() {
+    super.onDestroy();
+    binding = null;
   }
 }

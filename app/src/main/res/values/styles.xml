@@ -117,6 +117,7 @@
   <style name="style_fragment_progress_bar">
     <item name="android:layout_height">wrap_content</item>
     <item name="android:layout_width">wrap_content</item>
+    <item name="android:visibility">invisible</item>
   </style>
   <!-- Multipurpose/Default TextView -->
   <style name="style_fragment_multipurpose_textview" parent="style_parent_text_view">

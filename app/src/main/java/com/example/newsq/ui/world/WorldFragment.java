@@ -32,6 +32,7 @@ import java.util.Map;
  */
 public class WorldFragment extends Fragment implements LoaderCallbacks<ArrayList<Story>> {
 
+  private String url;
   private FragmentWorldBinding binding;
   private RecyclerView recyclerView;
   private StoryAdapter storyAdapter;
@@ -58,6 +59,7 @@ public class WorldFragment extends Fragment implements LoaderCallbacks<ArrayList
     defaultView = binding.textWorldDefault;
     progressBar = binding.progressCircular;
     recyclerView = binding.listNewsStories;
+    createUrlString();
     checkConfigureLoader();
     return binding.getRoot();
   }
@@ -77,36 +79,9 @@ public class WorldFragment extends Fragment implements LoaderCallbacks<ArrayList
   }
 
   /**
-   * Checks for an Internet connection before initializing the loader and contacting the API.
-   */
-  private void checkConfigureLoader() {
-    if (QueryUtils.isDeviceConnected(getContext())) {
-      final int WORLD_LOADER_ID = 1;
-      LoaderManager.getInstance(this).initLoader(WORLD_LOADER_ID, null, this);
-    } else {
-      progressBar.setVisibility(View.INVISIBLE);
-      defaultView.setText(getString(R.string.no_network_connection));
-    }
-  }
-
-  @Override
-  public void onDestroy() {
-    super.onDestroy();
-    binding = null;
-  }
-
-  @NonNull
-  @Override
-  public Loader<ArrayList<Story>> onCreateLoader(int id, @Nullable Bundle args) {
-    return new StoryLoader(requireContext(), createUrlString());
-  }
-
-  /**
    * Creates a {@link String} formatted for an API request.
-   *
-   * @return A {@link String} that contains a url for API requests.
    */
-  private String createUrlString() {
+  private void createUrlString() {
     Map<String, String> uriSegments = new HashMap<>();
     // Base URL
     uriSegments.put(getString(R.string.uri_scheme_key), getString(R.string.uri_scheme_value));
@@ -122,7 +97,28 @@ public class WorldFragment extends Fragment implements LoaderCallbacks<ArrayList
         getString(R.string.param_value_use_date_last_modified));
     uriSegments.put(getString(R.string.param_key_order_by),
         getString(R.string.param_value_order_by_newest));
-    return QueryUtils.createUri(uriSegments);
+    url = QueryUtils.createUri(uriSegments);
+  }
+
+  /**
+   * Checks for an Internet connection before initializing the loader and contacting the API.
+   */
+  private void checkConfigureLoader() {
+    if (QueryUtils.isDeviceConnected(getContext())) {
+      final int WORLD_LOADER_ID = 1;
+      defaultView.setVisibility(View.INVISIBLE);
+      recyclerView.setVisibility(View.INVISIBLE);
+      progressBar.setVisibility(View.VISIBLE);
+      LoaderManager.getInstance(this).initLoader(WORLD_LOADER_ID, null, this);
+    } else {
+      defaultView.setText(getString(R.string.no_network_connection));
+    }
+  }
+
+  @NonNull
+  @Override
+  public Loader<ArrayList<Story>> onCreateLoader(int id, @Nullable Bundle args) {
+    return new StoryLoader(requireContext(), url);
   }
 
   @Override
@@ -140,10 +136,11 @@ public class WorldFragment extends Fragment implements LoaderCallbacks<ArrayList
   private void updateUserInterface(boolean validResponse, ArrayList<Story> storyData) {
     progressBar.setVisibility(View.INVISIBLE);
     if (QueryUtils.isNullOrEmpty(storyData) && !validResponse) {     // Message for bad responses
+      defaultView.setVisibility(View.VISIBLE);
       defaultView.setText(QueryUtils.httpResponseMessage);
     }
     if (validResponse) {                                             // Update UI for good responses
-      defaultView.setVisibility(View.INVISIBLE);
+      recyclerView.setVisibility(View.VISIBLE);
       recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
       storyAdapter = new StoryAdapter(getContext(), storyData);
       recyclerView.setAdapter(storyAdapter);
@@ -156,5 +153,11 @@ public class WorldFragment extends Fragment implements LoaderCallbacks<ArrayList
   @Override
   public void onLoaderReset(@NonNull Loader<ArrayList<Story>> storyLoader) {
     storyAdapter.updateStories(new ArrayList<>());
+  }
+
+  @Override
+  public void onDestroy() {
+    super.onDestroy();
+    binding = null;
   }
 }
