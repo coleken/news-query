@@ -231,21 +231,6 @@ public final class QueryUtils {
   }
 
   /**
-   * Checks if the given {@link ArrayList} is null or empty.
-   *
-   * @param stories An {@link ArrayList} of {@link Story} objects.
-   * @return A {@link Boolean} value of true if the {@link ArrayList} is empty or null, and false if
-   * it isn't.
-   */
-  public static boolean isNullOrEmpty(ArrayList<Story> stories) {
-    boolean isNullOrEmpty = false;
-    if (stories == null || stories.isEmpty()) {
-      isNullOrEmpty = true;
-    }
-    return isNullOrEmpty;
-  }
-
-  /**
    * Checks if the given {@link String} is null or empty.
    *
    * @param string A {@link String} object.

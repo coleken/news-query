@@ -164,9 +164,9 @@ public class SearchFragment extends Fragment implements LoaderCallbacks<ArrayLis
     if (!validResponse) {
       if (QueryUtils.isConnectionError()) {
         defaultView.setText(getString(R.string.problem_with_request));
-        return;
       } else {
         defaultView.setText(QueryUtils.httpResponseMessage);
+        return;
       }
     }
     if (validResponse) {
