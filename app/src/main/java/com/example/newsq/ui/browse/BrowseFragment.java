@@ -211,26 +211,44 @@ public class BrowseFragment extends Fragment implements AdapterView.OnItemSelect
   private void updateUserInterface(boolean validResponse, ArrayList<Story> storyData) {
     progressBar.setVisibility(View.INVISIBLE);
     defaultView.setVisibility(View.VISIBLE);
-    if (!validResponse) {
-      if (QueryUtils.isConnectionError()) {
-        defaultView.setText(getString(R.string.problem_with_request));
-      } else {
-        defaultView.setText(QueryUtils.httpResponseMessage);
-        return;
-      }
+    if (storyData == null) {
+      defaultView.setText(R.string.no_data_available);
+    } else if (!validResponse) {
+      updateInvalidResponse();
+    } else {
+      updateValidResponse(storyData);
     }
-    if (validResponse) {
-      if (QueryUtils.isParseError) {
-        defaultView.setText(R.string.problem_with_response);
-      } else if (QueryUtils.isNoDataResponse) {
-        defaultView.setText(R.string.no_data_available);
-      } else {
-        defaultView.setVisibility(View.INVISIBLE);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        storyAdapter = new StoryAdapter(getContext(), storyData);
-        recyclerView.setVisibility(View.VISIBLE);
-        recyclerView.setAdapter(storyAdapter);
-      }
+  }
+
+  /**
+   * Updates the interface based on invalid responses; this method will show response codes and
+   * messages or a general error for connection-specific errors that yield no response codes.
+   */
+  private void updateInvalidResponse() {
+    if (QueryUtils.isConnectionError()) {
+      defaultView.setText(getString(R.string.problem_with_request));
+    } else {
+      defaultView.setText(QueryUtils.httpResponseMessage);
+    }
+  }
+
+  /**
+   * Updates the user interface based on valid responses; this method displays messages for parsing
+   * errors, displays news, and uses a general error where necessary.
+   *
+   * @param stories An {@link ArrayList} of {@link Story} objects.
+   */
+  private void updateValidResponse(ArrayList<Story> stories) {
+    if (QueryUtils.isParseError) {
+      defaultView.setText(R.string.problem_with_response);
+    } else if (QueryUtils.isNoDataResponse) {
+      defaultView.setText(R.string.no_data_available);
+    } else if (!QueryUtils.isNullOrEmpty(stories)) {
+      defaultView.setVisibility(View.INVISIBLE);
+      recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+      storyAdapter = new StoryAdapter(getContext(), stories);
+      recyclerView.setVisibility(View.VISIBLE);
+      recyclerView.setAdapter(storyAdapter);
     } else {
       defaultView.setVisibility(View.VISIBLE);
       defaultView.setText(getString(R.string.problem_with_request));
