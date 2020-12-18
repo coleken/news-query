@@ -151,8 +151,13 @@ public class WorldFragment extends Fragment implements LoaderCallbacks<ArrayList
       recyclerView.setVisibility(View.VISIBLE);
       recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
       storyAdapter = new StoryAdapter(getContext(), storyData);
-      recyclerView.setAdapter(storyAdapter);
-    } else {                                                         // For null/empty cases
+      if (storyAdapter.getItemCount() == 0) {                        // For response parsing errors
+        defaultView.setVisibility(View.VISIBLE);
+        defaultView.setText(R.string.problem_with_response);
+      } else {
+        recyclerView.setAdapter(storyAdapter);
+      }
+    } else {                                                         // For null/empty responses
       defaultView.setVisibility(View.VISIBLE);
       defaultView.setText(getString(R.string.problem_with_request));
     }
@@ -160,7 +165,9 @@ public class WorldFragment extends Fragment implements LoaderCallbacks<ArrayList
 
   @Override
   public void onLoaderReset(@NonNull Loader<ArrayList<Story>> storyLoader) {
-    storyAdapter.updateStories(new ArrayList<>());
+    if (storyAdapter != null) {
+      storyAdapter.updateStories(new ArrayList<>());
+    }
   }
 
   @Override

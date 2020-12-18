@@ -218,8 +218,13 @@ public class BrowseFragment extends Fragment implements AdapterView.OnItemSelect
       recyclerView.setVisibility(View.VISIBLE);
       recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
       storyAdapter = new StoryAdapter(getContext(), storyData);
-      recyclerView.setAdapter(storyAdapter);
-      binding.textNowReadingSection.setVisibility(View.VISIBLE);
+      if (storyAdapter.getItemCount() == 0) {                        // For response parsing errors
+        defaultView.setVisibility(View.VISIBLE);
+        defaultView.setText(R.string.problem_with_response);
+      } else {
+        recyclerView.setAdapter(storyAdapter);
+        binding.textNowReadingSection.setVisibility(View.VISIBLE);
+      }
     } else {                                                         // For null/empty cases
       defaultView.setVisibility(View.VISIBLE);
       defaultView.setText(getString(R.string.problem_with_request));
@@ -233,7 +238,9 @@ public class BrowseFragment extends Fragment implements AdapterView.OnItemSelect
 
   @Override
   public void onLoaderReset(@NonNull Loader<ArrayList<Story>> storyLoader) {
-    storyAdapter.updateStories(new ArrayList<>());
+    if (storyAdapter != null) {
+      storyAdapter.updateStories(new ArrayList<>());
+    }
   }
 
   @Override

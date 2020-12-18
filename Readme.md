@@ -27,6 +27,6 @@ This is a proof-of-competency app that was created to fulfill the requirements o
 * HTTP response validation
 * JSON response parsing
 * Loaders 
-* Error handling
+* Exception handling
 * URI Builder 
 * Intents

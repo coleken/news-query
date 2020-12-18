@@ -131,9 +131,9 @@ public final class QueryUtils {
         for (int i = 0; i < newsArray.length(); i++) {
           // Extract story attributes
           JSONObject storyAttribute = newsArray.getJSONObject(i);
-          String sectionName = storyAttribute.getString(SECTION_NAME);
-          String publicationDate = storyAttribute.getString(WEB_PUBLICATION_DATE);
-          String webUrl = storyAttribute.getString(WEB_URL);
+          String sectionName = checkJsonArray(storyAttribute.getString(SECTION_NAME));
+          String publicationDate = checkJsonArray(storyAttribute.getString(WEB_PUBLICATION_DATE));
+          String webUrl = checkJsonArray(storyAttribute.getString(WEB_URL));
           // Extract relevant fields
           JSONObject responseFields = newsArray.getJSONObject(i).getJSONObject(JSON_FIELDS);
           String headline = checkGetJsonFields(responseFields, HEADLINE);
@@ -147,6 +147,22 @@ public final class QueryUtils {
       }
     }
     return stories;
+  }
+
+  /**
+   * Checks the attributes in the {@link JSONArray} of the API response for null values and returns
+   * a {@link String} that is empty if the value <b>does not</b> exist, or contains the value if it
+   * <b>does</b> exist.
+   *
+   * @param attribute A {@link String} that contains the attribute from the {@link JSONArray}
+   * @return A {@link String} that's empty if the value is null, or the original value if it's not.
+   */
+  private static String checkJsonArray(String attribute) {
+    String jsonAttribute = "";
+    if (attribute != null) {
+      jsonAttribute = attribute;
+    }
+    return jsonAttribute;
   }
 
   /**

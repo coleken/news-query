@@ -119,7 +119,11 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
 
   @Override
   public int getItemCount() {
-    return STORIES.size();
+    if (STORIES != null) {
+      return STORIES.size();
+    } else {
+      return 0;
+    }
   }
 
   /**
@@ -128,8 +132,10 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.StoryViewHol
    * @param stories An {@link ArrayList} of {@link Story} objects.
    */
   public void updateStories(ArrayList<Story> stories) {
-    STORIES.addAll(stories);
-    notifyDataSetChanged();
+    if (stories != null && !stories.isEmpty()) {
+      STORIES.addAll(stories);
+      notifyDataSetChanged();
+    }
   }
 
   /**

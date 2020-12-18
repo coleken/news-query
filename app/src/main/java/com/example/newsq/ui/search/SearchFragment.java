@@ -169,7 +169,12 @@ public class SearchFragment extends Fragment implements LoaderCallbacks<ArrayLis
       recyclerView.setVisibility(View.VISIBLE);
       recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
       storyAdapter = new StoryAdapter(getContext(), storyData);
-      recyclerView.setAdapter(storyAdapter);
+      if (storyAdapter.getItemCount() == 0) {                        // For response parsing errors
+        defaultView.setVisibility(View.VISIBLE);
+        defaultView.setText(R.string.problem_with_response);
+      } else {
+        recyclerView.setAdapter(storyAdapter);
+      }
     } else {                                                         // For null/empty cases
       defaultView.setVisibility(View.VISIBLE);
       defaultView.setText(getString(R.string.problem_with_request));
@@ -188,7 +193,9 @@ public class SearchFragment extends Fragment implements LoaderCallbacks<ArrayLis
 
   @Override
   public void onLoaderReset(@NonNull Loader<ArrayList<Story>> loader) {
-    storyAdapter.updateStories(new ArrayList<>());
+    if (storyAdapter != null) {
+      storyAdapter.updateStories(new ArrayList<>());
+    }
   }
 
   @Override
