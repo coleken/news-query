@@ -27,7 +27,9 @@ import org.json.JSONObject;
  */
 public final class QueryUtils {
 
-  public static String httpResponseMessage;
+  public static String httpResponseMessage = "";
+  public static boolean isNoDataResponse;
+  public static boolean isParseError;
 
   private static final String LOG_TAG = QueryUtils.class.getSimpleName();
   private static final String JSON_RESPONSE = "response";
@@ -119,10 +121,14 @@ public final class QueryUtils {
    * @param response A {@link String} that contains the response data.
    * @return An {@link ArrayList} of news objects obtained from the API request.
    */
-  @NonNull
   private static ArrayList<Story> extractNewsStories(String response) {
     ArrayList<Story> stories = new ArrayList<>();
-    if (!isNullOrEmpty(response) && HttpConnectionClient.responseOk) {
+    isNoDataResponse = false;
+    isParseError = false;
+    if (isNullOrEmpty(response) && HttpConnectionClient.responseOk) {
+      isNoDataResponse = true;
+      return null;
+    } else if (!isNullOrEmpty(response) && HttpConnectionClient.responseOk) {
       try {
         // Get response object
         JSONObject responseData = new JSONObject(response).getJSONObject(JSON_RESPONSE);
@@ -144,6 +150,8 @@ public final class QueryUtils {
         }
       } catch (JSONException e) {
         Log.e(LOG_TAG, "Problem parsing JSON response", e);
+        isParseError = true;
+        return null;
       }
     }
     return stories;
@@ -285,6 +293,16 @@ public final class QueryUtils {
   }
 
   /**
+   * Returns a {@link Boolean} to indicate if a connection error occurred.
+   *
+   * @return A {@link Boolean} value of true if an error occurred, and false if it didn't.
+   * @see HttpConnectionClient#caughtConnectionError
+   */
+  public static boolean isConnectionError() {
+    return HttpConnectionClient.caughtConnectionError;
+  }
+
+  /**
    * Returns a {@link Boolean} to indicate if the device is currently connected to the network.
    *
    * @return A {@link Boolean} value of true if the device is connected, and false if it isn't.
@@ -300,6 +318,7 @@ public final class QueryUtils {
   private final static class HttpConnectionClient {
 
     private static final String LOG_TAG = HttpURLConnection.class.getSimpleName();
+
     /**
      * A {@link Boolean} Boolean with a state of true if the HTTP response is valid (code 200), and
      * false if the response is invalid.
@@ -307,6 +326,15 @@ public final class QueryUtils {
      * @see #getHttpResponse(URL)
      */
     private static boolean responseOk;
+
+    /**
+     * A {@link Boolean} with a state of true if a connection error occurred; this is used to make
+     * sure the screen is responsive for errors unrelated to parsing or response codes, e.g. a local
+     * network connection only.
+     *
+     * @see #getHttpResponse(URL)
+     */
+    private static boolean caughtConnectionError;
 
     /**
      * Default constructor
@@ -349,6 +377,7 @@ public final class QueryUtils {
     private static String getHttpResponse(URL url) {
       HttpURLConnection connection = null;
       responseOk = false;
+      caughtConnectionError = false;
       String response = "";
       final int STATUS_OK = 200;
       final int connectionTimeoutLimit = 10000; // in milliseconds
@@ -369,6 +398,7 @@ public final class QueryUtils {
           }
         } catch (IOException e) {
           Log.e(LOG_TAG, "There was a problem connecting to the server." + response, e);
+          caughtConnectionError = true;
         } finally {
           if (connection != null) {
             connection.disconnect();

@@ -193,6 +193,8 @@
   <string name="problem_with_request">There was a problem with the request.</string>
   <!-- For empty/null values or parsing problems in an API response -->
   <string name="problem_with_response">There was a problem reading the response.</string>
+  <!-- For valid responses with no data -->
+  <string name="no_data_available">An unknown error has occurred, no data available.</string>
   <!-- Date retrieved label -->
   <string name="date_retrieved">Date Retrieved: </string>
   <!-- Error message label -->

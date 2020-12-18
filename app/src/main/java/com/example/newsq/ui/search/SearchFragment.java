@@ -160,22 +160,28 @@ public class SearchFragment extends Fragment implements LoaderCallbacks<ArrayLis
    */
   private void updateUserInterface(boolean validResponse, ArrayList<Story> storyData) {
     progressBar.setVisibility(View.INVISIBLE);
-    if (QueryUtils.isNullOrEmpty(storyData) && !validResponse) {     // Message for bad responses
-      defaultView.setVisibility(View.VISIBLE);
-      defaultView.setText(QueryUtils.httpResponseMessage);
-    }
-    if (validResponse) {                                             // Update UI for good responses
-      defaultView.setVisibility(View.INVISIBLE);
-      recyclerView.setVisibility(View.VISIBLE);
-      recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-      storyAdapter = new StoryAdapter(getContext(), storyData);
-      if (storyAdapter.getItemCount() == 0) {                        // For response parsing errors
-        defaultView.setVisibility(View.VISIBLE);
-        defaultView.setText(R.string.problem_with_response);
+    defaultView.setVisibility(View.VISIBLE);
+    if (!validResponse) {
+      if (QueryUtils.isConnectionError()) {
+        defaultView.setText(getString(R.string.problem_with_request));
+        return;
       } else {
+        defaultView.setText(QueryUtils.httpResponseMessage);
+      }
+    }
+    if (validResponse) {
+      if (QueryUtils.isParseError) {
+        defaultView.setText(R.string.problem_with_response);
+      } else if (QueryUtils.isNoDataResponse) {
+        defaultView.setText(R.string.no_data_available);
+      } else {
+        defaultView.setVisibility(View.INVISIBLE);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        storyAdapter = new StoryAdapter(getContext(), storyData);
+        recyclerView.setVisibility(View.VISIBLE);
         recyclerView.setAdapter(storyAdapter);
       }
-    } else {                                                         // For null/empty cases
+    } else {
       defaultView.setVisibility(View.VISIBLE);
       defaultView.setText(getString(R.string.problem_with_request));
     }

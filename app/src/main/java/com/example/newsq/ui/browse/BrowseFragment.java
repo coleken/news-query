@@ -210,22 +210,28 @@ public class BrowseFragment extends Fragment implements AdapterView.OnItemSelect
    */
   private void updateUserInterface(boolean validResponse, ArrayList<Story> storyData) {
     progressBar.setVisibility(View.INVISIBLE);
-    if (QueryUtils.isNullOrEmpty(storyData) && !validResponse) {     // Message for bad responses
-      defaultView.setVisibility(View.VISIBLE);
-      defaultView.setText(QueryUtils.httpResponseMessage);
-    }
-    if (validResponse) {                                             // Update UI for good responses
-      recyclerView.setVisibility(View.VISIBLE);
-      recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-      storyAdapter = new StoryAdapter(getContext(), storyData);
-      if (storyAdapter.getItemCount() == 0) {                        // For response parsing errors
-        defaultView.setVisibility(View.VISIBLE);
-        defaultView.setText(R.string.problem_with_response);
+    defaultView.setVisibility(View.VISIBLE);
+    if (!validResponse) {
+      if (QueryUtils.isConnectionError()) {
+        defaultView.setText(getString(R.string.problem_with_request));
+        return;
       } else {
-        recyclerView.setAdapter(storyAdapter);
-        binding.textNowReadingSection.setVisibility(View.VISIBLE);
+        defaultView.setText(QueryUtils.httpResponseMessage);
       }
-    } else {                                                         // For null/empty cases
+    }
+    if (validResponse) {
+      if (QueryUtils.isParseError) {
+        defaultView.setText(R.string.problem_with_response);
+      } else if (QueryUtils.isNoDataResponse) {
+        defaultView.setText(R.string.no_data_available);
+      } else {
+        defaultView.setVisibility(View.INVISIBLE);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        storyAdapter = new StoryAdapter(getContext(), storyData);
+        recyclerView.setVisibility(View.VISIBLE);
+        recyclerView.setAdapter(storyAdapter);
+      }
+    } else {
       defaultView.setVisibility(View.VISIBLE);
       defaultView.setText(getString(R.string.problem_with_request));
     }
