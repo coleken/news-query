@@ -66,10 +66,14 @@
   <string name="spinner_world">World</string>
 
   <!-- = = = = = = = = = = Browse/Search Fragment Text = = = = = = = = = = -->
-  <!-- Search EditText Field Hint -->
-  <string name="search_for_news">Search for News</string>
+  <!-- Search Query Hint-->
+  <string name="search_query_hint">Search News</string>
   <!-- Browse Spinner Now Reading TextView -->
   <string name="string_now_reading_section">Now Reading:</string>
+  <!-- Browse default message-->
+  <string name="browse_default_message">Select a category from the list.</string>
+  <!-- Search default message-->
+  <string name="search_default_message">Enter a term to search.</string>
 
   <!-- = = = = = = = = = = API Query Text = = = = = = = = = = -->
   <!-- = = = = = Base URL = = = = = -->
@@ -183,8 +187,6 @@
   <string name="story_publication_date">Publication Date</string>
   <!-- Story Contributors -->
   <string name="string_story_byline">Contributors</string>
-  <!-- Story Alert Button Text -->
-  <string name="alert_button">Done</string>
 
   <!-- = = = = = = = = = = Data & Connection Status Messages = = = = = = = = = = -->
   <!-- No Internet connection message -->
@@ -195,14 +197,4 @@
   <string name="problem_with_response">There was a problem reading the response.</string>
   <!-- For null/empty states in URIs/URLs and responses -->
   <string name="no_data_available">An error has occurred, no data available.</string>
-  <!-- Date retrieved label -->
-  <string name="date_retrieved">Date Retrieved: </string>
-  <!-- Error message label -->
-  <string name="error_label">Error: </string>
-  <!-- Browse default message-->
-  <string name="browse_default_message">Select a category from the list.</string>
-  <!-- Search default message-->
-  <string name="search_default_message">Enter a term to search.</string>
-  <!-- Search Query Hint-->
-  <string name="search_query_hint">Search News</string>
 </resources>

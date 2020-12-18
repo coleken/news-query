@@ -118,6 +118,7 @@ public class BrowseFragment extends Fragment implements AdapterView.OnItemSelect
   public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
     if (position > 0) { // Skips the default/non-functional spinner array item
       String selection = parent.getSelectedItem().toString();
+      binding.textNowReadingSection.setVisibility(View.VISIBLE);
       createUrlString(selection);
       checkConfigureLoader();
     } else {
