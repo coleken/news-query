@@ -112,13 +112,14 @@ public class WorldFragment extends Fragment implements LoaderCallbacks<ArrayList
    * Checks for an Internet connection before initializing the loader and contacting the API.
    */
   private void checkConfigureLoader() {
+    final int WORLD_LOADER_ID = 1;
+    recyclerView.setVisibility(View.INVISIBLE);
     if (QueryUtils.isDeviceConnected(getContext())) {
-      final int WORLD_LOADER_ID = 1;
       defaultView.setVisibility(View.INVISIBLE);
-      recyclerView.setVisibility(View.INVISIBLE);
       progressBar.setVisibility(View.VISIBLE);
       LoaderManager.getInstance(this).initLoader(WORLD_LOADER_ID, null, this);
     } else {
+      defaultView.setVisibility(View.VISIBLE);
       defaultView.setText(getString(R.string.no_network_connection));
     }
   }

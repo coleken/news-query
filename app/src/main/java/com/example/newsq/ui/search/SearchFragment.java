@@ -120,10 +120,10 @@ public class SearchFragment extends Fragment implements LoaderCallbacks<ArrayLis
    * the API.
    */
   private void checkConfigureLoader() {
+    recyclerView.setVisibility(View.INVISIBLE);
     final int SEARCH_LOADER_ID = 3;
     if (QueryUtils.isDeviceConnected(getContext())) {
       defaultView.setVisibility(View.INVISIBLE);
-      recyclerView.setVisibility(View.INVISIBLE);
       progressBar.setVisibility(View.VISIBLE);
       /*
       Checks hasLoaderInit to determine if restartLoader or initLoader is called; hasLoaderInit is
@@ -136,6 +136,7 @@ public class SearchFragment extends Fragment implements LoaderCallbacks<ArrayLis
         LoaderManager.getInstance(this).restartLoader(SEARCH_LOADER_ID, null, this);
       }
     } else {
+      defaultView.setVisibility(View.VISIBLE);
       defaultView.setText(getString(R.string.no_network_connection));
     }
   }

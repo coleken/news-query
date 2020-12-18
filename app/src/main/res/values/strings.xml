@@ -189,12 +189,12 @@
   <!-- = = = = = = = = = = Data & Connection Status Messages = = = = = = = = = = -->
   <!-- No Internet connection message -->
   <string name="no_network_connection">No Internet connection.</string>
-  <!-- For empty/null values in an API request -->
+  <!-- Caught connection exception and  -->
   <string name="problem_with_request">There was a problem with the request.</string>
-  <!-- For empty/null values or parsing problems in an API response -->
+  <!-- For parsing problems in an API response -->
   <string name="problem_with_response">There was a problem reading the response.</string>
-  <!-- For valid responses with no data -->
-  <string name="no_data_available">An unknown error has occurred, no data available.</string>
+  <!-- For null/empty states in URIs/URLs and responses -->
+  <string name="no_data_available">An error has occurred, no data available.</string>
   <!-- Date retrieved label -->
   <string name="date_retrieved">Date Retrieved: </string>
   <!-- Error message label -->

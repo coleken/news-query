@@ -171,9 +171,9 @@ public class BrowseFragment extends Fragment implements AdapterView.OnItemSelect
    */
   private void checkConfigureLoader() {
     final int BROWSE_LOADER_ID = 2;
+    recyclerView.setVisibility(View.INVISIBLE);
     if (QueryUtils.isDeviceConnected(getContext())) {
       defaultView.setVisibility(View.INVISIBLE);
-      recyclerView.setVisibility(View.INVISIBLE);
       progressBar.setVisibility(View.VISIBLE);
       /*
       Checks hasLoaderInit to determine if restartLoader or initLoader is called; hasLoaderInit is
@@ -186,6 +186,7 @@ public class BrowseFragment extends Fragment implements AdapterView.OnItemSelect
         LoaderManager.getInstance(this).restartLoader(BROWSE_LOADER_ID, null, this);
       }
     } else {
+      defaultView.setVisibility(View.VISIBLE);
       defaultView.setText(getString(R.string.no_network_connection));
     }
   }
