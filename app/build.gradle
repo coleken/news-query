@@ -63,7 +63,8 @@ class ApiKey {
         File keyFile = new File("key.properties")
         if (!keyFile.exists()) {
             keyFile.createNewFile()
-            keyFile.text = "isKeyEncoded=false\nAPI_KEY=\"test\""
+            keyFile.text = "#True for base 64, False for plaintext." +
+                    "\nisKeyEncoded=false\nAPI_KEY=\"test\""
         }
         getKeyProperties(keyFile)
     }

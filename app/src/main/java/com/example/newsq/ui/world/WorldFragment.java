@@ -72,6 +72,14 @@ public class WorldFragment extends Fragment implements LoaderCallbacks<ArrayList
    * @param view An instance of {@link View}.
    */
   private void hideKeyboard(View view) {
+    /*
+     * Method: hideKeyboard (and its preceding versions)
+     * Adopted Content: Procedure for obtaining a window token in fragments.
+     * Date Created: 12/15/2020
+     * Original Source Code Location: https://stackoverflow.com/questions/1109022/
+     * Asked by: Ak23; https://stackoverflow.com/users/11945183
+     * Answered by: mirabelle; https://stackoverflow.com/users/680583
+     */
     InputMethodManager manager = (InputMethodManager) requireContext()
         .getSystemService(Activity.INPUT_METHOD_SERVICE);
     manager.hideSoftInputFromWindow(view.getWindowToken(),
