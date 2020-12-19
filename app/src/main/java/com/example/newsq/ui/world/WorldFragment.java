@@ -146,7 +146,12 @@ public class WorldFragment extends Fragment implements LoaderCallbacks<ArrayList
     progressBar.setVisibility(View.INVISIBLE);
     defaultView.setVisibility(View.VISIBLE);
     if (storyData == null) {
-      defaultView.setText(R.string.no_data_available);
+      if (!QueryUtils.isDeviceConnected(getContext())) {
+        recyclerView.setVisibility(View.INVISIBLE);
+        defaultView.setText(R.string.no_network_connection);
+      } else {
+        defaultView.setText(R.string.no_data_available);
+      }
     } else if (!validResponse) {
       updateInvalidResponse();
     } else {
