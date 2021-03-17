@@ -1,6 +1,6 @@
 # News Q
 
-News Q is an application for the Android operating system that retrieves and displays news articles.
+News Q is an application for the Android operating system that retrieves and displays excerpts from news articles.
 
 ## Project Requirements
 * Minimum SDK: 21
