@@ -16,7 +16,7 @@ News Q is an application for the Android operating system that retrieves and dis
 ## Installation
 Clone the News Q repository:
 
-`$ https://github.com/coleken/news-query.git`
+`$ https://github.com/kelocen/news-query.git`
 
 ## Configuration
 API keys can be stored as plaintext or base 64 in `project-root/key.properties`.
